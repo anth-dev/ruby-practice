@@ -10,24 +10,19 @@ while raw_input != "" do
   raw_input = gets.chomp
 end
 
-p words
-
-# keep track of output from spaceship operator
-neg_one_counter = 0
-zero_counter = 0
-one_counter = 0
-# as long as words is not empty keep running
+# as long as words array is not empty keep running
 while words[0] != nil do
-  # check words[0] against all other items in the array
-  # with the spaceship operator and record the results
+  # check words[0] against next item in the array
+  # with the spaceship operator
   if ((words[0] <=> words[1]) == -1)
     puts "#{words[0]} comes before #{words[1]}"
   elsif ((words[0] <=> words[1]) == 0)
     puts "#{words[0]} is equivalent to #{words[1]}"
   elsif ((words[0] <=> words[1]) == 1)
     puts "#{words[0]} goes after #{words[1]}"
+    words.push(words[1])
   end
 
-  # words.shift is the iterator
+  # words.shift is the iterator for testing
   words.shift
 end
