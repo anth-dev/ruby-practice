@@ -1,18 +1,3 @@
-# going to try a different direction then the method below 
-
-# def find_lowest(word, array)
-#   puts "Find lowest is running with: #{word}, #{array}"
-#   i = 0
-#   while i <= (array.length - 1) do
-#     current_result = word <=> array[i]
-#     p current_result
-#     if current_result == -1
-#       puts "#{array[i]} comes after #{word}" 
-#     end
-#     i += 1
-#   end  
-# end
-
 puts "Enter words to sort. Only one per line please."
 raw_input = gets.chomp
 words = []
