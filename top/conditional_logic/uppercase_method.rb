@@ -7,5 +7,4 @@ puts "Enter your string over 10 characters"
 puts "----------------------------------"
 
 input = gets.chomp
-output_string = caps input
-puts output_string
+puts caps input
