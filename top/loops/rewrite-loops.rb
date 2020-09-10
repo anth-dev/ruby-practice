@@ -89,4 +89,30 @@ puts "you must enter yes to continue (currently commented out)"
 
 puts ""
 
-puts "Loop 6"
+puts "Loop 6 - for loop to times loop"
+
+for i in 0..5
+  puts "#{i} zombies incoming!"
+end
+
+puts ""
+
+6.times do |i|
+  puts "#{i} zombies incoming!"
+end
+
+puts ""
+
+puts "Loop 7 - times loop to until loop"
+
+5.times do
+  puts "Hello, world!"
+end
+
+puts ""
+
+i = 0
+until i == 5 do
+  puts "Hello, world!"
+  i += 1
+end
