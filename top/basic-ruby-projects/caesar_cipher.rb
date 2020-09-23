@@ -14,8 +14,6 @@ string = gets.chomp
 puts "Input your shift."
 shift = gets.chomp.to_i * 2
 
-# adjust shift factor to "loop" from z or Z to a or Z
-
 # split the string into an array of characters
 character_array = string.split('')
 
@@ -36,6 +34,7 @@ the encrypted_string because it's a special character
   if index > alphabet.length
     puts "we need to loop here!"
   else
+  
   # shovel the encrypted character into the string
   encrypted_string << alphabet[index]
   end
