@@ -1,5 +1,3 @@
-require 'pry'
-
 # make an array containing the complete alphabet
 alphabet = %w[a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z]
 
@@ -29,10 +27,11 @@ the encrypted_string because it's a special character
 
   # locate the character in the alphabet array and add the shift value
   index = alphabet.index(char) + shift
-
+  
   # check to see if we need to loop around the alphabet array
-  if index > alphabet.length
-    puts "we need to loop here!"
+  if index > alphabet.length - 1
+    remainder = index % 52
+    encrypted_string << alphabet[remainder]
   else
   
   # shovel the encrypted character into the string
