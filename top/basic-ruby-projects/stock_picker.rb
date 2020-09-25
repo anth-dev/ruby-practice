@@ -15,13 +15,19 @@ example:
 =end
 
 def stock_picker(prices)
-  # Iterate over 'prices' array
+  # Iterate over 'prices' array and for each buy day calculate the maximum
+  # possible profit if you bought on that day.
   prices.each_with_index do |price, buy_day|
     puts "Day: #{buy_day} Price: #{price}"
-    # For each buy_day iterate over the rest of the array to calculate maximum
-    # possible profit if you bought on that day.
 
-    # Look for a method to get just the days that come after the buy_day
+    # Get all the remaining days after the current buy_day.
+    remaining = prices[buy_day + 1..-1]
+    
+    # Iterate over all the remaining days and calculate the profit if you
+    # were to sell on that day.
+    remaining.each_with_index do |price, buy_day|
+      
+    end
   end
 end
 
@@ -29,11 +35,11 @@ puts stock_picker([17,3,6,9,15,8,6,1,10])
 
 =begin
 Idea 1:
-Iterate over the 'prices' array and for each element do the following.
+Iterate over the 'prices' array.
 
-Set the 'buy' to current 'price' and then take the rest of the array and use
-map to calculate how much profit you would have if you sold on that day and
-store the results in a new array with it's index correlating with the day.
+Set the 'buy' to current 'price' and then take the rest of the array and
+calculate how much profit you would have if you sold on that day.
+Store the results in a new array with it's index correlating with the day.
 
 [[profit, buy day, sell day], [profit, buy day, sell day], etc..]             
 
