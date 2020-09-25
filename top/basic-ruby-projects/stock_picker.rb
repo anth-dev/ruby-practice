@@ -25,9 +25,6 @@ def stock_picker(prices)
   # possible profit if you bought on that day.
   prices.each_with_index do |buy_price, buy_day|
 
-    # test values
-    puts "Buy Day: #{buy_day} Buy Price: #{buy_price}"
-
     # Get all the remaining days after the current buy_day.
     remaining = prices[buy_day + 1..-1]
 
@@ -37,9 +34,6 @@ def stock_picker(prices)
     # Iterate over all the remaining days and calculate the profit if you
     # were to sell on that day.
     remaining.each_with_index do |sell_price, sell_day|
-
-      # test values
-      puts "Profit: #{sell_price - buy_price} Sell Day: #{sell_day + buy_day + 1}"
 
       # format the data imagined in the above puts and store the data in an
       # array
@@ -52,30 +46,15 @@ def stock_picker(prices)
 
   end
 
-# Get rid of the nil value, and sort the array.
-max_profit_per_day.compact.sort.pop
+# Get rid of the nil value, and sort the array, and store the most profitable
+# day in an array.
+when_to_buy_and_sell = max_profit_per_day.compact.sort.pop
 
+# shift the profit out of the array
+when_to_buy_and_sell.shift
+
+# return the day to buy and sell
+when_to_buy_and_sell
 end
 
 p stock_picker([17,3,6,9,15,8,6,1,10])
-
-=begin
-Idea 1:
-Iterate over the 'prices' array.
-
-Set the 'buy' to current 'price' and then take the rest of the array and
-calculate how much profit you would have if you sold on that day.
-Store the results in a new array with it's index correlating with the day.
-
-[[profit, buy day, sell day], [profit, buy day, sell day], etc..]             
-
-take that array and do .sort.pop to return the highest profit element for
-buying on that day
-
-take that element with the highest possible profit for that day and toss it
-into yet another array representing the highest profit you could get buying
-on that day
-
-after that has been done for each day look at the final results array to find
-the buy day with the highest possible profit
-=end
