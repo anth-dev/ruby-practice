@@ -38,6 +38,7 @@ def stock_picker(prices)
       # format the data imagined in the above puts and store the data in an
       # array
       possible_profit.push([sell_price - buy_price, buy_day, sell_day + buy_day + 1])
+
     end
     
     # Sort the possible profits for the day and push the highest one to the
@@ -55,6 +56,7 @@ when_to_buy_and_sell.shift
 
 # return the day to buy and sell
 when_to_buy_and_sell
+
 end
 
 p stock_picker([17,3,6,9,15,8,6,1,10])
