@@ -17,16 +17,19 @@ example:
 def stock_picker(prices)
   # Iterate over 'prices' array and for each buy day calculate the maximum
   # possible profit if you bought on that day.
-  prices.each_with_index do |price, buy_day|
-    puts "Day: #{buy_day} Price: #{price}"
+  prices.each_with_index do |buy_price, buy_day|
+    puts "Buy Day: #{buy_day} Buy Price: #{buy_price}"
 
     # Get all the remaining days after the current buy_day.
     remaining = prices[buy_day + 1..-1]
     
     # Iterate over all the remaining days and calculate the profit if you
     # were to sell on that day.
-    remaining.each_with_index do |price, buy_day|
-      
+    remaining.each_with_index do |sell_price, sell_day|
+      puts "Profit: #{sell_price - buy_price} Sell Day: #{sell_day + buy_day + 1}"
+
+      # format the data imagined in the above puts and store the data in an
+      # array
     end
   end
 end
