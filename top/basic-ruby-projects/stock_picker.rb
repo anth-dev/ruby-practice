@@ -14,8 +14,6 @@ example:
 
 =end
 
-require 'pry'
-
 def stock_picker(prices)
   # Use an array to store the data we find with each element being another
   # array with the following data [max_profit, buy_day, sell_day]
