@@ -33,8 +33,7 @@ def stock_picker(prices)
     # were to sell on that day.
     remaining.each_with_index do |sell_price, sell_day|
 
-      # format the data imagined in the above puts and store the data in an
-      # array
+      # format the data and store the data in an array
       possible_profit.push([sell_price - buy_price, buy_day, sell_day + buy_day + 1])
 
     end
