@@ -27,7 +27,7 @@ def bubble_sort(unsorted_numbers)
         # Select a pair of numbers 
         unsorted_pair = select_pair(unsorted_numbers, start_index)
 
-        # Look at the first two numbers and determine their correct order.
+        # Look at the pair of numbers and determine their correct order.
         sorted_pair = sort_pair(unsorted_pair[0], unsorted_pair[1])
 
         # Reassign the array elements to correspond with correct order.
