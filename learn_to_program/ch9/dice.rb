@@ -16,10 +16,17 @@ class Die
   end
 
   def cheat(num)
+    if num > 6
+      @numberShowing = 6
+    elsif num < 1
+      @numberShowing = 1
+    else
     @numberShowing = num
+    end
   end
 
 end
 
 puts Die.new.showing
-puts Die.new.cheat(4)
+puts Die.new.cheat(10)
+puts Die.new.cheat(-999)
