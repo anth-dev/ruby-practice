@@ -15,11 +15,11 @@ class Die
     @numberShowing
   end
 
-  def cheat
-    @numberShowing = 6
+  def cheat(num)
+    @numberShowing = num
   end
 
 end
 
 puts Die.new.showing
-puts Die.new.cheat
+puts Die.new.cheat(4)
