@@ -20,6 +20,7 @@ class GoodDog
   def info 
     "#{name} weighs #{weight} and is #{height} tall."
   end
+
 end
 
 sparky = GoodDog.new("Sparky", "12 inches", "10 lbs")
