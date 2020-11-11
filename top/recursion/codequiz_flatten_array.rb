@@ -6,6 +6,7 @@ require 'pry'
 # [[1, 2], [3, 4]] to [1, 2, 3, 4] and [[1, [8, 9]], [3, 4]] to [1, 8, 9, 3, 4].
 
 def flatten_array(array, flattened_array = [])
+
   # When there are no elements left, return the flattened array.
   return flattened_array if array.empty?
 
@@ -13,20 +14,22 @@ def flatten_array(array, flattened_array = [])
   # iterate over the nested array shifting each item out and and pushing
   # the item to the flattened_array that will eventually be returned.
   if array.first.class == Array
-    # Iterate over the nested array pushing each element to flattened_array.
-    # FIXME: This is currently having an issue when running into arrays nested
-    # deeper than one level.
-    array.first.each do |element|
-      flattened_array.push(element)
-    end
+    # Call the flatten_array method and save the returned flattened array to
+    # a variable we can work with.
+    # FIXME: This isn't working with arrays nested more than one level deep.
+    flattened_array.push(array.first.shift)
 
-    # Remove the first element of the array (it should be the empty nested
-    # array)
-    array.shift
+    # The following three lines are the original code that is being refactored.
+    # array.first.each do |element|
+    #   flattened_array.push(element)
+    # end
+
+    # Remove the first element of the array if it's now empty.
+    array.shift if array.first.empty?
   else
 
-    # Here we should have an array element that isn't a nested array. Unshift
-    # the element to the start of the flattened_array.
+    # Here we should have an array element that isn't a nested array. Push
+    # the element to the flattened array.
     flattened_array.push(array[0])
   end
 
