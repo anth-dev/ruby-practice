@@ -22,7 +22,7 @@ def flatten_array(array, flattened_array = [])
 
     # Remove the first element of the array (it should be the empty nested
     # array)
-    array.shift()
+    array.shift
   else
 
     # Here we should have an array element that isn't a nested array. Unshift
