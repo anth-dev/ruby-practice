@@ -14,6 +14,8 @@ def flatten_array(array, flattened_array = [])
   # the item to the flattened_array that will eventually be returned.
   if array.first.class == Array
     # Iterate over the nested array pushing each element to flattened_array.
+    # FIXME: This is currently having an issue when running into arrays nested
+    # deeper than one level.
     array.first.each do |element|
       flattened_array.push(element)
     end
