@@ -3,10 +3,20 @@
 # Use the roman_mapping hash to define a recursive method that converts an
 # integer to a Roman numeral.
 
-def to_roman_numeral(int, conversion_map, )
-  # Shift the first item out of the conversion map to work with.
+def to_roman_numeral(integer, conversion_map, roman_numeral = nil)
+  return roman_numeral if conversion_map.empty?
 
-  # Divide the integer by the shifted key's value. ??
+  # Shift the first item out of the conversion map to work with.
+  current_conversion = conversion_map.shift
+
+  puts "current_conversion: #{current_conversion.first} to #{current_conversion.last}"
+  
+  # Divide the integer by the shifted key's value or something yet to be determined.
+  
+
+
+  # Call the method again
+  to_roman_numeral(integer, conversion_map)
 end
 
 roman_mapping = {
