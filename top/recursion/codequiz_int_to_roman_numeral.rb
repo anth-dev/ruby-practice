@@ -3,8 +3,10 @@
 # Use the roman_mapping hash to define a recursive method that converts an
 # integer to a Roman numeral.
 
-def to_roman_numeral(int, conversion_map)
+def to_roman_numeral(int, conversion_map, )
+  # Shift the first item out of the conversion map to work with.
 
+  # Divide the integer by the shifted key's value. ??
 end
 
 roman_mapping = {
@@ -23,4 +25,4 @@ roman_mapping = {
   1 => "I"
 }
 
-puts to_roman_numeral(35, roman_mapping)
+puts to_roman_numeral(1000, roman_mapping)
