@@ -11,8 +11,6 @@ def int_to_roman_numeral(integer, conversion_map, roman_numeral = [])
   conversion_integer = current_conversion.first
   conversion_numeral = current_conversion.last
 
-  integer / conversion_integer
-
   (integer / conversion_integer).times do
     roman_numeral.push(conversion_numeral)
     integer -= conversion_integer
