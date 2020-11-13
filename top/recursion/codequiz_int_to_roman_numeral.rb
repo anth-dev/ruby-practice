@@ -3,7 +3,7 @@
 # Use the roman_mapping hash to define a recursive method that converts an
 #   integer to a Roman numeral.
 
-def to_roman_numeral(integer, conversion_map, roman_numeral = [])
+def int_to_roman_numeral(integer, conversion_map, roman_numeral = [])
   return roman_numeral.join if conversion_map.empty?
 
   current_conversion = conversion_map.shift
@@ -18,7 +18,7 @@ def to_roman_numeral(integer, conversion_map, roman_numeral = [])
     integer -= conversion_integer
   end
 
-  to_roman_numeral(integer, conversion_map, roman_numeral)
+  int_to_roman_numeral(integer, conversion_map, roman_numeral)
 end
 
 roman_mapping = {
@@ -37,4 +37,4 @@ roman_mapping = {
   1 => 'I'
 }
 
-puts to_roman_numeral(1984, roman_mapping)
+puts int_to_roman_numeral(1984, roman_mapping)
