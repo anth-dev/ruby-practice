@@ -4,42 +4,37 @@
 #   integer to a Roman numeral.
 
 def to_roman_numeral(integer, conversion_map, roman_numeral = [])
-  return roman_numeral if conversion_map.empty?
+  return roman_numeral.join if conversion_map.empty?
 
-  # Shift the first item out of the conversion map to work with.
   current_conversion = conversion_map.shift
 
-  conversion_integer = current_conversion.first 
+  conversion_integer = current_conversion.first
   conversion_numeral = current_conversion.last
 
-  puts "#{conversion_integer} #{conversion_numeral}"
-  
-  # Do math with the conversion_integer to find how many times it goes into the
-  #   integer.
+  integer / conversion_integer
 
-  # For each time that conversion_integer went into integer push the conversion
-  #   numeral to the roman numeral array.
+  (integer / conversion_integer).times do
+    roman_numeral.push(conversion_numeral)
+    integer -= conversion_integer
+  end
 
-  # Subtract the amount converted from integer.
-
-  # Call the method again
-  to_roman_numeral(integer, conversion_map)
+  to_roman_numeral(integer, conversion_map, roman_numeral)
 end
 
 roman_mapping = {
-  1000 => "M",
-  900 => "CM",
-  500 => "D",
-  400 => "CD",
-  100 => "C",
-  90 => "XC",
-  50 => "L",
-  40 => "XL",
-  10 => "X",
-  9 => "IX",
-  5 => "V",
-  4 => "IV",
-  1 => "I"
+  1000 => 'M',
+  900 => 'CM',
+  500 => 'D',
+  400 => 'CD',
+  100 => 'C',
+  90 => 'XC',
+  50 => 'L',
+  40 => 'XL',
+  10 => 'X',
+  9 => 'IX',
+  5 => 'V',
+  4 => 'IV',
+  1 => 'I'
 }
 
-puts to_roman_numeral(1000, roman_mapping)
+puts to_roman_numeral(1984, roman_mapping)
