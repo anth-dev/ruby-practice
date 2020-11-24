@@ -20,7 +20,7 @@ class LinkedList
     @head = Node.new(value)
 
     # Set head's next_node to be the old 
-    @head.next_node = old_head
+    @head.next = old_head
   end
 
   # Return the total number of nodes in the list.
@@ -68,11 +68,11 @@ class LinkedList
 end
 
 class Node
-  attr_accessor :value, :next_node
+  attr_accessor :value, :next
 
   def initialize(value)
     @value = value
-    @next_node = nil
+    @next = nil
   end
 end
 
