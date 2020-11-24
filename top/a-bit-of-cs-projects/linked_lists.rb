@@ -7,6 +7,18 @@ class LinkedList
 
   # Add a new node containing value to the end of the list.
   def append(value)
+ 
+    # Store our starting spot on the list.
+    current_node = @head.next
+    
+    # Go through the list until you get to the last item which will have a next
+    #   of nil.
+    until current_node.next == nil
+      current_node = current_node.next
+    end
+
+    # Add the a new node as next for the current node.
+    current_node.next = Node.new(value) 
 
   end
 
@@ -86,7 +98,13 @@ my_list.prepend(5)
 # Prepend another node to the start of the list.
 my_list.prepend(4)
 
-# Prepent another node to the start of the list.
+# Prepend another node to the start of the list.
 my_list.prepend(3)
+
+# Append an item to the end of the list.
+my_list.append(6)
+
+# Append another item to the end of the list.
+my_list.append(7)
 
 p my_list
