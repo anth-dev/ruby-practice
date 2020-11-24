@@ -68,7 +68,8 @@ class LinkedList
 end
 
 class Node
-  attr_accessor :value, :next
+  attr_reader :value
+  attr_accessor :next
 
   def initialize(value)
     @value = value
