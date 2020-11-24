@@ -37,13 +37,20 @@ class LinkedList
   # Return the total number of nodes in the list.
   def size
     # Store our starting spot on the list.
+    current_node = @head
 
-    # Initialize a counter to track the index we are at.
+    # Initialize a counter to track the number of Nodes we have went though.
+    node_count = 1
 
     # Go through the list until you get to the last item which will have a
     #   next of nil. Each time we advance increment the index counter.
+    until current_node.next == nil
+      current_node = current_node.next
+      node_count += 1
+    end
 
-    # Return the index counter once we have gotten to the end of the list.
+    # Puts the node_count.
+    puts "The list has #{node_count} items."
   end
 
   # Return the first node in the list.
@@ -112,5 +119,8 @@ my_list.append(6)
 
 # Append another item to the end of the list.
 my_list.append(7)
+
+# Check the size of the list.
+my_list.size
 
 p my_list
