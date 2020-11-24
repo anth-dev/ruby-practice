@@ -9,7 +9,7 @@ class LinkedList
   def append(value)
  
     # Store our starting spot on the list.
-    current_node = @head.next
+    current_node = @head
     
     # Go through the list until you get to the last item which will have a next
     #   of nil.
@@ -18,8 +18,7 @@ class LinkedList
     end
 
     # Add the a new node as next for the current node.
-    current_node.next = Node.new(value) 
-
+    current_node.next = Node.new(value)
   end
 
   # Add a new node containing value to the start of the list.
@@ -37,7 +36,14 @@ class LinkedList
 
   # Return the total number of nodes in the list.
   def size
+    # Store our starting spot on the list.
 
+    # Initialize a counter to track the index we are at.
+
+    # Go through the list until you get to the last item which will have a
+    #   next of nil. Each time we advance increment the index counter.
+
+    # Return the index counter once we have gotten to the end of the list.
   end
 
   # Return the first node in the list.
