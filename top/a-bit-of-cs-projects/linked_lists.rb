@@ -12,7 +12,15 @@ class LinkedList
 
   # Add a new node containing value to the start of the list.
   def prepend(value)
+    # Get the current value for head so it can be made the next value for the
+    # new Node object.
+    old_head = @head
 
+    # Store the new Node in head.
+    @head = Node.new(value)
+
+    # Set head's next_node to be the old 
+    @head.next_node = old_head
   end
 
   # Return the total number of nodes in the list.
@@ -60,9 +68,24 @@ class LinkedList
 end
 
 class Node
-  def initialize
-    @value = nil
+  attr_accessor :value, :next_node
+
+  def initialize(value)
+    @value = value
     @next_node = nil
   end
 end
 
+# Generate a new list.
+my_list = LinkedList.new
+
+# Prepend a Node to the empty list.
+my_list.prepend(5)
+
+# Prepend another node to the start of the list.
+my_list.prepend(4)
+
+# Prepent another node to the start of the list.
+my_list.prepend(3)
+
+p my_list
