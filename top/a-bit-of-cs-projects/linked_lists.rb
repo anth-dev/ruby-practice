@@ -113,7 +113,21 @@ class LinkedList
   # Returns true if the passed in value is in the list and otherwise returns
   #   false.
   def contains?(value)
+    # Use a variable to track if the value has been found or not.
+    match = false
 
+    # Store the starting spot on the list.
+    current_node = @head
+
+    # Go through the list checking the values for either a match or the end
+    #   of the list.
+    until current_node == nil
+      match = true if current_node.value == value
+      current_node = current_node.next
+    end
+
+    # Return the variable.
+    match
   end
 
   # Returns the index of the node containing value, or nil if not found.
@@ -179,3 +193,9 @@ puts "Removed #{my_list.pop!} from the list."
 # The list after popping the last item.
 puts "The list after popping out the last item:"
 p my_list
+
+# Check to see if 5 is contained in the list.
+puts "Contains 5? #{my_list.contains?(5)}"
+
+# Check to see if 10 is contained in the list.
+puts "Contains 10? #{my_list.contains?(10)}"
