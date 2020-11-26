@@ -91,8 +91,23 @@ class LinkedList
   end
 
   # Removes the last element from the list.
-  def pop
+  def pop!
+    # Store out starting spot on the list.
+    current_node = @head
 
+    # Go through the list until we are at the second to last item.
+    until current_node.next.next == nil
+      current_node = current_node.next
+    end
+
+    # Store the value of the last item to return at the end of the method.
+    removed_value = current_node.next.value
+    
+    # Change the next value to nil to make it the last item on the list.
+    current_node.next = nil
+
+    # Return the value that was removed from the list.
+    removed_value
   end
 
   # Returns true if the passed in value is in the list and otherwise returns
@@ -154,4 +169,13 @@ puts "The last node is #{my_list.tail}."
 # Return the node at the given index.
 puts "The node at index 2 is #{my_list.at(2)}."
 
+# Display list before removing last item with pop.
+puts "The list before popping out the last item:"
+p my_list
+
+# Pop the last item out of the list.
+puts "Removed #{my_list.pop!} from the list."
+
+# The list after popping the last item.
+puts "The list after popping out the last item:"
 p my_list
