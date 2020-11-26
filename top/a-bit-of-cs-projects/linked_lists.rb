@@ -49,13 +49,13 @@ class LinkedList
       node_count += 1
     end
 
-    # Puts the node_count.
-    puts "The list has #{node_count} items."
+    # Return the node_count.
+    node_count
   end
 
   # Return the first node in the list.
   def head
-    puts "The first item is #{@head.value}."
+    @head.value
   end
 
   # Return the last node in the list.
@@ -69,12 +69,25 @@ class LinkedList
     end
 
     # Return the value of the final node.
-    puts "The last item is #{current_node.value}"
+    current_node.value
   end
 
   # Return the node at the given index.
   def at(index)
+    # Store our starting spot on the list.
+    current_node = @head
 
+    # Initialize a counter to track the index we are on.
+    current_index = 0
+
+    # Go through the linked list until we get to the requested index.
+    until current_index == index
+      current_node = current_node.next
+      current_index += 1
+    end
+
+    # Return the value at that index.
+    current_node.value
   end
 
   # Removes the last element from the list.
@@ -129,13 +142,16 @@ my_list.append(6)
 # Append another item to the end of the list.
 my_list.append(7)
 
-# Check the size of the list.
-my_list.size
+# Return the size of the list.
+puts "The list has #{my_list.size} nodes."
 
-# Return the head item.
-my_list.head
+# Return the first node..
+puts "The first node is #{my_list.head}."
 
-# Output the last item.
-my_list.tail
+# Return the last node.
+puts "The last node is #{my_list.tail}."
+
+# Return the node at the given index.
+puts "The node at index 2 is #{my_list.at(2)}."
 
 p my_list
