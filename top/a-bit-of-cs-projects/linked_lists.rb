@@ -55,12 +55,21 @@ class LinkedList
 
   # Return the first node in the list.
   def head
-
+    puts "The first item is #{@head.value}."
   end
 
   # Return the last node in the list.
   def tail
+    # Store our starting spot on the list.
+    current_node = @head
 
+    # Go through the list until we have a next of nil.
+    until current_node.next == nil
+      current_node = current_node.next
+    end
+
+    # Return the value of the final node.
+    puts "The last item is #{current_node.value}"
   end
 
   # Return the node at the given index.
@@ -122,5 +131,11 @@ my_list.append(7)
 
 # Check the size of the list.
 my_list.size
+
+# Return the head item.
+my_list.head
+
+# Output the last item.
+my_list.tail
 
 p my_list
