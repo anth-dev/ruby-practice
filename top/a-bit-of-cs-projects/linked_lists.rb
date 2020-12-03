@@ -161,7 +161,15 @@ class LinkedList
   #   console.
   #   ( value ) -> ( value ) -> ( value ) -> nil
   def to_s
+    # Store our starting spot on the list.
+    current_node = @head
 
+    # Go through the linked list and print each Node's value to the console.
+    until current_node == nil
+      print "( #{current_node.value} ) -> "
+      current_node = current_node.next
+    end
+    print "nil"
   end
 end
 
@@ -227,3 +235,6 @@ puts "6 is located at #{my_list.find(6)}"
 
 # Check to see where/if 10 is in the list.
 puts "10 is located at #{my_list.find(10)}"
+
+# View the list as a string.
+puts my_list.to_s
