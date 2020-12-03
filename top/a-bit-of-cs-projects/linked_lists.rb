@@ -132,7 +132,29 @@ class LinkedList
 
   # Returns the index of the node containing value, or nil if not found.
   def find(value)
+    # Store our starting spot on the list.
+    current_node = @head
 
+    # Initialize a counter to track the index we are on.
+    current_index = 0
+
+    # Store the index where the value is found.
+    index_of_value = nil
+
+    # Go through the linked list incrementing current_index and checking for a
+    #   value that matches the value passed to this method.
+    until current_node == nil
+
+      # Check to see if the current node's value matches the value passed to
+      #   this method.
+      index_of_value = current_index if current_node.value == value
+
+      current_node = current_node.next
+      current_index += 1
+    end
+
+    # Return index_of_value or 'nil'.
+    index_of_value || 'nil'
   end
 
   # Represent LinkedList objects as strings so they can be printed to the
@@ -199,3 +221,9 @@ puts "Contains 5? #{my_list.contains?(5)}"
 
 # Check to see if 10 is contained in the list.
 puts "Contains 10? #{my_list.contains?(10)}"
+
+# Check to see where/if 6 is in the list.
+puts "6 is located at #{my_list.find(6)}"
+
+# Check to see where/if 10 is in the list.
+puts "10 is located at #{my_list.find(10)}"
