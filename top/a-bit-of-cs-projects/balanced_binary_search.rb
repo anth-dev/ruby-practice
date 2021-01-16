@@ -6,12 +6,18 @@ class Node
 
   def initialize(data)
     @data = data
-    @left_child = nil
-    @right_child = nil
+    @left = nil
+    @right = nil
   end
 
   def <=>(other_Node)
     data <=> other_Node.data
+  end
+end
+
+class Tree
+  def initialize(array)
+    @root = build_tree
   end
 end
 
