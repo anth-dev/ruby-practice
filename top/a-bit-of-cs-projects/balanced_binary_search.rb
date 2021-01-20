@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'pry'
+
 class Node
   include Comparable
-  attr :data
+  # FIXME: Add accessors so left and right values can be set after each Node is
+  #   created.
+  attr :data, :left, :right
 
   def initialize(data)
     @data = data
@@ -10,14 +14,20 @@ class Node
     @right = nil
   end
 
-  def <=>(other_Node)
-    data <=> other_Node.data
+  def <=>(other_node)
+    data <=> other_node.data
   end
 end
 
 class Tree
   def initialize(array)
-    @root = build_tree
+    @root = build_tree(array)
+  end
+
+  # The build_tree method should return the level-1 root node.
+  def build_tree(array)
+    # FIXME: Pseudocode the algorithm.
+    binding.pry
   end
 end
 
@@ -29,3 +39,5 @@ p second_node
 
 p first_node < second_node
 p first_node > second_node
+
+test_tree_class = Tree.new([1])
