@@ -28,7 +28,7 @@ class Tree
   def build_tree(array)
     
     # Set the base case to stop recursion.
-    return array.first if array.length == 1 # Not working correctly?
+    return array.first if array.length == 1
 
     # Make sure the array is sorted and has no duplicates values.
     prepared_array = array.sort.uniq
