@@ -6,7 +6,7 @@ class Node
   include Comparable
   # FIXME: Add accessors so left and right values can be set after each Node is
   #   created.
-  attr :data, :left, :right
+  attr_accessor :data, :left, :right
 
   def initialize(data)
     @data = data
@@ -26,8 +26,9 @@ class Tree
 
   # The build_tree method should return the level-1 root node.
   def build_tree(array)
+    
     # Set the base case to stop recursion.
-    # return nil if ...
+    return array.first if array.length == 1 # Not working correctly?
 
     # Make sure the array is sorted and has no duplicates values.
     prepared_array = array.sort.uniq
@@ -37,13 +38,15 @@ class Tree
 
     # Create a node with the middle element as root.
     node = Node.new(prepared_array[mid])
-    binding.pry
 
     # Recursively call build_tree method on all elements left of middle.
+    node.left = build_tree(prepared_array[0..mid - 1])
 
-    # Recursively cass build_tree method on all elements right of middle.
+    # Recursively call build_tree method on all elements right of middle.
+    node.right = build_tree(prepared_array[mid + 1..-1])
   end
 
+  # FIXME: The pretty print method isn't working correctly.
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
