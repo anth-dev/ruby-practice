@@ -4,8 +4,6 @@ require 'pry'
 
 class Node
   include Comparable
-  # FIXME: Add accessors so left and right values can be set after each Node is
-  #   created.
   attr_accessor :data, :left, :right
 
   def initialize(data)
