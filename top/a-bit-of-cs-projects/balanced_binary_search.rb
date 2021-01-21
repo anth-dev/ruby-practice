@@ -26,8 +26,17 @@ class Tree
 
   # The build_tree method should return the level-1 root node.
   def build_tree(array)
-    # FIXME: Pseudocode the algorithm.
-    binding.pry
+    # Set the base case to stop recursion.
+
+    # Make sure the array is sorted and has no duplicates values.
+
+    # Find the middle of the array.
+
+    # Make the middle element the root.
+
+    # Recursively call build_tree method on all elements left of middle.
+
+    # Recursively cass build_tree method on all elements right of middle.
   end
 end
 
