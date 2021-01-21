@@ -32,11 +32,12 @@ class Tree
     # Make sure the array is sorted and has no duplicates values.
     prepared_array = array.sort.uniq
 
-    binding.pry
-
     # Find the middle of the array.
+    mid = (prepared_array.length - 1) / 2
 
-    # Make the middle element the root.
+    # Create a node with the middle element as root.
+    node = Node.new(prepared_array[mid])
+    binding.pry
 
     # Recursively call build_tree method on all elements left of middle.
 
