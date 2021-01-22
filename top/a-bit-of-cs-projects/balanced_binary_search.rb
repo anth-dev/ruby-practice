@@ -23,11 +23,10 @@ class Tree
   end
 
   # The build_tree method should return the level-1 root node.
+  # FIXME: The build_tree method is not working if given more than 3 items.
   def build_tree(array)
 
-    
-    # Set the base case to stop recursion.
-    return array.first if array.length == 1
+    binding.pry
 
     # Make sure the array is sorted and has no duplicates values.
     prepared_array = array.sort.uniq
@@ -50,7 +49,6 @@ class Tree
 
   # FIXME: The pretty print method isn't working correctly.
   def pretty_print(node = @root, prefix = '', is_left = true)
-
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
@@ -64,7 +62,5 @@ p first_node < second_node
 p first_node > second_node
 
 # Testing Tree class.
-test_tree_one = Tree.new([2, 1, 3])
-
-p test_tree_one
-pp test_tree_one
+test_tree_one = Tree.new([2, 1, 3, 9, 5])
+test_tree_one.pretty_print
