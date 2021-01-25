@@ -62,5 +62,5 @@ p first_node < second_node
 p first_node > second_node
 
 # Testing Tree class.
-test_tree_one = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+test_tree_one = Tree.new([1, 2, 3, 4, 5])
 test_tree_one.pretty_print
