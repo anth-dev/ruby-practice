@@ -72,7 +72,14 @@ class Tree
     return node
   end
 
-  # FIXME: The pretty print method isn't working correctly.
+  def insert
+
+  end
+
+  def delete
+
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
