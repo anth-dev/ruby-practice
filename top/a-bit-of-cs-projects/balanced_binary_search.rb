@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 class Node
   include Comparable
   attr_accessor :data, :left, :right
@@ -23,25 +21,52 @@ class Tree
   end
 
   # The build_tree method should return the level-1 root node.
-  # FIXME: The build_tree method is not working if given more than 3 items.
-  def build_tree(array)
-
-    binding.pry
+  def build_tree(array, right = false)
 
     # Make sure the array is sorted and has no duplicates values.
     prepared_array = array.sort.uniq
 
-    # Find the middle of the array.
-    mid = (prepared_array.length - 1) / 2
+    # Check if we are down to two elements yet.
+    if prepared_array.length == 2
+      
+      if right
 
-    # Create a node with the middle element as root.
-    node = Node.new(prepared_array[mid])
+        # Make the lesser number into a node.
+        node = Node.new(prepared_array.first)
 
-    # Recursively call build_tree method on all elements left of middle.
-    node.left = Node.new(build_tree(prepared_array[0..mid - 1]))
+        # Set the created node's right value to be a new node of the greater
+        #   number.
+        node.right = Node.new(prepared_array.last)
 
-    # Recursively call build_tree method on all elements right of middle.
-    node.right = Node.new(build_tree(prepared_array[mid + 1..-1]))
+      else
+
+        # Make the greater number into a node.
+        node = Node.new(prepared_array.last)
+
+        # Set the created node's left value to be a new node of the lesser
+        #   number.
+        node.left = Node.new(prepared_array.first)
+
+      end
+
+    else
+
+      # Find the middle of the array.
+      mid = (prepared_array.length - 1) / 2
+
+      # Create a node with the middle element as root.
+      node = Node.new(prepared_array[mid])
+
+      # If we only have the one item, return the node now.
+      return node if prepared_array.length == 1
+
+      # Recursively call build_tree method on all elements left of middle.
+      node.left = Node.new(build_tree(prepared_array[0..mid - 1]))
+
+      # Recursively call build_tree method on all elements right of middle.
+      node.right = Node.new(build_tree(prepared_array[mid + 1..-1], true))
+
+    end
 
     # Return root node.
     return node
@@ -63,4 +88,9 @@ p first_node > second_node
 
 # Testing Tree class.
 test_tree_one = Tree.new([1, 2, 3, 4, 5])
+p test_tree_one
 test_tree_one.pretty_print
+
+test_tree_two = Tree.new([1, 2, 3])
+p test_tree_two
+test_tree_two.pretty_print
