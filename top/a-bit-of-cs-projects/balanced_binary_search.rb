@@ -61,10 +61,10 @@ class Tree
       return node if prepared_array.length == 1
 
       # Recursively call build_tree method on all elements left of middle.
-      node.left = Node.new(build_tree(prepared_array[0..mid - 1]))
+      node.left = build_tree(prepared_array[0..mid - 1])
 
       # Recursively call build_tree method on all elements right of middle.
-      node.right = Node.new(build_tree(prepared_array[mid + 1..-1], true))
+      node.right = build_tree(prepared_array[mid + 1..-1], true)
 
     end
 
