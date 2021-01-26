@@ -72,8 +72,12 @@ class Tree
     return node
   end
 
-  def insert
-
+  def insert(root, key)
+    # If we get to a leaf return a new node containing the key.
+      
+    # Else... If there is a match (in case of duplicate) return root,
+    #   check the root's value to be less than key and insert at right, else
+    #   insert at left.
   end
 
   def delete
