@@ -73,6 +73,9 @@ class Tree
   end
 
   def insert(root, key)
+
+    binding.pry
+
     # If we get to a leaf return a new node containing the key.
       
     # Else... If there is a match (in case of duplicate) return root,
