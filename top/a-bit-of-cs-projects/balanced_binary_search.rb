@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry'
+
 class Node
   include Comparable
   attr_accessor :data, :left, :right
@@ -16,6 +18,9 @@ class Node
 end
 
 class Tree
+
+  attr_accessor :root
+
   def initialize(array)
     @root = build_tree(array)
   end
@@ -73,14 +78,22 @@ class Tree
   end
 
   def insert(root, key)
+    # A new key is always inserted at the leaf. We start searching a key from
+    #   the root until we hit a leaf node. Once a leaf node is found, the new
+    #   node is added as a child of the leaf node. 
 
     binding.pry
 
-    # If we get to a leaf return a new node containing the key.
-      
-    # Else... If there is a match (in case of duplicate) return root,
-    #   check the root's value to be less than key and insert at right, else
-    #   insert at left.
+   # Base cases??
+   #    Get to a leaf node and make a new node containing the key.
+
+   # Compare the key to the data attribute of root.
+
+   # If the key is smaller than root, recursivly call this method on the left
+   #    subtree of root passing along the key we want to insert.
+
+   # Else, recursively call this method on the right subtree of root passing
+   #    along the key we want to insert.
   end
 
   def delete
@@ -108,3 +121,8 @@ test_tree_one.pretty_print
 test_tree_two = Tree.new([1, 2, 3])
 p test_tree_two
 test_tree_two.pretty_print
+
+# Test insert method.
+test_tree_three = Tree.new([3, 7, 9, 10, 13])
+test_tree_three.pretty_print
+test_tree_three.insert(test_tree_three.root, 11)
