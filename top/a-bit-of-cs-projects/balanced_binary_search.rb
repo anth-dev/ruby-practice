@@ -78,22 +78,30 @@ class Tree
   end
 
   def insert(root, key)
-    # A new key is always inserted at the leaf. We start searching a key from
-    #   the root until we hit a leaf node. Once a leaf node is found, the new
-    #   node is added as a child of the leaf node. 
 
-    binding.pry
+    # Base cases??
+    #    Get to a leaf node and make a new node containing the key.
+    if root.nil?
+      return Node.new(key)
 
-   # Base cases??
-   #    Get to a leaf node and make a new node containing the key.
+    # Compare the key to the data attribute of root.
+    else
+      if root.data == key
+        return root
 
-   # Compare the key to the data attribute of root.
+      # If the key is smaller than root, recursivly call this method on the left
+      #    subtree of root passing along the key we want to insert.
+      elsif root.data < key
+        root.right = insert(root.right, key)
 
-   # If the key is smaller than root, recursivly call this method on the left
-   #    subtree of root passing along the key we want to insert.
+      # Else, recursively call this method on the right subtree of root passing
+      #    along the key we want to insert.
+      else
+        root.left = insert(root.left, key)
+      end
+    end
 
-   # Else, recursively call this method on the right subtree of root passing
-   #    along the key we want to insert.
+    return root
   end
 
   def delete
@@ -126,3 +134,4 @@ test_tree_two.pretty_print
 test_tree_three = Tree.new([3, 7, 9, 10, 13])
 test_tree_three.pretty_print
 test_tree_three.insert(test_tree_three.root, 11)
+test_tree_three.pretty_print
