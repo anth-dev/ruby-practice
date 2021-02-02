@@ -77,7 +77,7 @@ class Tree
     return node
   end
 
-  def insert(root, key)
+  def insertNode(root, key)
 
     # Base cases??
     #    Get to a leaf node and make a new node containing the key.
@@ -92,23 +92,29 @@ class Tree
       # If the key is smaller than root, recursivly call this method on the left
       #    subtree of root passing along the key we want to insert.
       elsif root.data < key
-        root.right = insert(root.right, key)
+        root.right = insertNode(root.right, key)
 
       # Else, recursively call this method on the right subtree of root passing
       #    along the key we want to insert.
       else
-        root.left = insert(root.left, key)
+        root.left = insertNode(root.left, key)
       end
     end
 
     return root
   end
 
-  def delete(root, key)
+  def deleteNode(root, key)
     # Base case: Return root if root is nil
+    return root if root.nil?
 
     # Compare root's data value to with the key looking to be deleted to
     #   determine where to look for it.
+    if key < root.data
+      root.left = deleteNode
+
+    end
+
 
     # Check to see if root's key matches the key to be deleted. Account for
     #   one or less children and cases where it has two children.
@@ -139,5 +145,5 @@ test_tree_two.pretty_print
 # Test insert method.
 test_tree_three = Tree.new([3, 7, 9, 10, 13])
 test_tree_three.pretty_print
-test_tree_three.insert(test_tree_three.root, 11)
+test_tree_three.insertNode(test_tree_three.root, 11)
 test_tree_three.pretty_print
