@@ -104,8 +104,14 @@ class Tree
     return root
   end
 
-  def delete
+  def delete(root, key)
+    # Base case: Return root if root is nil
 
+    # Compare root's data value to with the key looking to be deleted to
+    #   determine where to look for it.
+
+    # Check to see if root's key matches the key to be deleted. Account for
+    #   one or less children and cases where it has two children.
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
