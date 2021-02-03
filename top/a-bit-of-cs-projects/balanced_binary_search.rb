@@ -77,7 +77,7 @@ class Tree
     return node
   end
 
-  def insertNode(root, key)
+  def insert_node(root, key)
 
     # Base cases??
     #    Get to a leaf node and make a new node containing the key.
@@ -92,31 +92,31 @@ class Tree
       # If the key is smaller than root, recursivly call this method on the left
       #    subtree of root passing along the key we want to insert.
       elsif root.data < key
-        root.right = insertNode(root.right, key)
+        root.right = insert_node(root.right, key)
 
       # Else, recursively call this method on the right subtree of root passing
       #    along the key we want to insert.
       else
-        root.left = insertNode(root.left, key)
+        root.left = insert_node(root.left, key)
       end
     end
 
     return root
   end
 
-  # FIXME: deleteNode isn't working properly when the root node is being
+  # FIXME: delete_node isn't working properly when the root node is being
   #   deleted. Try with other nodes with two children.
-  def deleteNode(root, key)
+  def delete_node(root, key)
     # Base case: Return root if root is nil
     return root if root.nil?
 
     # Compare root's data value to with the key looking to be deleted to
     #   determine where to look for it.
     if key < root.data
-      root.left = deleteNode(root.left, key)
+      root.left = delete_node(root.left, key)
 
     elsif key > root.data
-      root.right = deleteNode(root.right, key)
+      root.right = delete_node(root.right, key)
 
 
     # If root's key matches the key to be deleted account for
@@ -143,14 +143,14 @@ class Tree
       root.data = temp.data
 
       # Delete the inorder successor.
-      root.right = deleteNode(root.right, temp.data)
+      root.right = delete_node(root.right, temp.data)
       end
     end
 
     return root
   end
 
-  def minValueNode(node)
+  def min_value_node(node)
     current = node
 
     # Loop down through the tree to find the leftmost leaf.
@@ -186,9 +186,9 @@ test_tree_two.pretty_print
 # Test insert method.
 test_tree_three = Tree.new([3, 7, 9, 10, 13])
 test_tree_three.pretty_print
-test_tree_three.insertNode(test_tree_three.root, 11)
+test_tree_three.insert_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
 
 # Test delete method.
-test_tree_three.deleteNode(test_tree_three.root, 11)
+test_tree_three.delete_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
