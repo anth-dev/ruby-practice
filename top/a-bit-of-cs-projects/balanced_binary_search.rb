@@ -104,8 +104,7 @@ class Tree
     return root
   end
 
-  # FIXME: delete_node isn't working properly when the root node is being
-  #   deleted. Try with other nodes with two children.
+  # FIXME: delete_node isn't working when the node has two children.
   def delete_node(root, key)
     # Base case: Return root if root is nil
     return root if root.nil?
@@ -137,7 +136,7 @@ class Tree
       # Node has two children.
 
       # Get inorder successor.
-      temp = minValueNode(root.right)
+      temp = min_value_node(root.right)
 
       # Copy the inorder successor's content to the current node.
       root.data = temp.data
@@ -184,11 +183,11 @@ p test_tree_two
 test_tree_two.pretty_print
 
 # Test insert method.
-test_tree_three = Tree.new([3, 7, 9, 10, 13])
+test_tree_three = Tree.new([1, 3, 7, 9, 10, 13])
 test_tree_three.pretty_print
 test_tree_three.insert_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
 
 # Test delete method.
-test_tree_three.delete_node(test_tree_three.root, 11)
+test_tree_three.delete_node(test_tree_three.root, 13)
 test_tree_three.pretty_print
