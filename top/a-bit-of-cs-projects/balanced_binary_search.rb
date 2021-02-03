@@ -104,7 +104,6 @@ class Tree
     return root
   end
 
-  # FIXME: delete_node isn't working when the node has two children.
   def delete_node(root, key)
     # Base case: Return root if root is nil
     return root if root.nil?
@@ -132,6 +131,7 @@ class Tree
         temp = root.left
         root = nil
         return temp
+      end
 
       # Node has two children.
 
@@ -143,7 +143,6 @@ class Tree
 
       # Delete the inorder successor.
       root.right = delete_node(root.right, temp.data)
-      end
     end
 
     return root
@@ -189,5 +188,5 @@ test_tree_three.insert_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
 
 # Test delete method.
-test_tree_three.delete_node(test_tree_three.root, 13)
+test_tree_three.delete_node(test_tree_three.root, 7)
 test_tree_three.pretty_print
