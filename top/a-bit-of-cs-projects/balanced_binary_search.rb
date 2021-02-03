@@ -159,6 +159,18 @@ class Tree
     return current
   end
 
+  def find(root, key)
+    # Base case: Root is nil or it's data matches the key.
+    return root if root.nil? || root.data == key
+
+    # Key is greater than root's key.
+    return find(root.right, key) if root.data < key
+
+    # Key is smaller than root's key.
+    return find(root.left, key)
+
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -190,3 +202,6 @@ test_tree_three.pretty_print
 # Test delete method.
 test_tree_three.delete_node(test_tree_three.root, 7)
 test_tree_three.pretty_print
+
+# Test the find method.
+p test_tree_three.find(test_tree_three.root, 13)
