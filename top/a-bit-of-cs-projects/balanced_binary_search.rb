@@ -104,6 +104,8 @@ class Tree
     return root
   end
 
+  # FIXME: deleteNode isn't working properly when the root node is being
+  #   deleted. Try with other nodes with two children.
   def deleteNode(root, key)
     # Base case: Return root if root is nil
     return root if root.nil?
@@ -111,13 +113,52 @@ class Tree
     # Compare root's data value to with the key looking to be deleted to
     #   determine where to look for it.
     if key < root.data
-      root.left = deleteNode
+      root.left = deleteNode(root.left, key)
 
+    elsif key > root.data
+      root.right = deleteNode(root.right, key)
+
+
+    # If root's key matches the key to be deleted account for
+    #   one or less children and cases where it has two children.
+    else
+
+      # Node has one or less children.
+      if root.left.nil?
+        temp = root.right
+        root = nil
+        return temp
+
+      elsif root.right.nil?
+        temp = root.left
+        root = nil
+        return temp
+
+      # Node has two children.
+
+      # Get inorder successor.
+      temp = minValueNode(root.right)
+
+      # Copy the inorder successor's content to the current node.
+      root.data = temp.data
+
+      # Delete the inorder successor.
+      root.right = deleteNode(root.right, temp.data)
+      end
     end
 
+    return root
+  end
 
-    # Check to see if root's key matches the key to be deleted. Account for
-    #   one or less children and cases where it has two children.
+  def minValueNode(node)
+    current = node
+
+    # Loop down through the tree to find the leftmost leaf.
+    while current.left.nil? == false
+      current = current.left
+    end
+
+    return current
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -146,4 +187,8 @@ test_tree_two.pretty_print
 test_tree_three = Tree.new([3, 7, 9, 10, 13])
 test_tree_three.pretty_print
 test_tree_three.insertNode(test_tree_three.root, 11)
+test_tree_three.pretty_print
+
+# Test delete method.
+test_tree_three.deleteNode(test_tree_three.root, 11)
 test_tree_three.pretty_print
