@@ -175,17 +175,19 @@ class Tree
 
     return if node.nil?
 
+    recorded_data = []
     queue = []
     queue.push(node)
 
     until queue.empty? do
       current = queue.first
-      p current.data
+      recorded_data.push(current.data)
       queue.push(current.left) if current.left.nil? == false
       queue.push(current.right) if current.right.nil? == false
       queue.shift
     end
     
+    recorded_data
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -224,4 +226,4 @@ test_tree_three.pretty_print
 p test_tree_three.find(test_tree_three.root, 13)
 
 # Test the level_order method.
-test_tree_three.level_order(test_tree_three.root)
+p test_tree_three.level_order(test_tree_three.root)
