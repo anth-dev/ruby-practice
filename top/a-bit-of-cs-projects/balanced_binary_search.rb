@@ -173,6 +173,19 @@ class Tree
 
   def level_order(node)
 
+    return if node.nil?
+
+    queue = []
+    queue.push(node)
+
+    until queue.empty? do
+      current = queue.first
+      p current.data
+      queue.push(current.left) if current.left.nil? == false
+      queue.push(current.right) if current.right.nil? == false
+      queue.shift
+    end
+    
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -204,8 +217,11 @@ test_tree_three.insert_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
 
 # Test delete method.
-test_tree_three.delete_node(test_tree_three.root, 7)
+test_tree_three.delete_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
 
 # Test the find method.
 p test_tree_three.find(test_tree_three.root, 13)
+
+# Test the level_order method.
+test_tree_three.level_order(test_tree_three.root)
