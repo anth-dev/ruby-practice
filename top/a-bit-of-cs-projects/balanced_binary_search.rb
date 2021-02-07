@@ -190,11 +190,22 @@ class Tree
     recorded_data
   end
 
+  def inorder(root, recorded_data = [])
+    return if root.nil?
+
+    inorder(root.left, recorded_data)
+    recorded_data.push(root.data)
+    inorder(root.right, recorded_data)
+
+    recorded_data
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
 end
 
 # Testing comparable module.
@@ -227,3 +238,6 @@ p test_tree_three.find(test_tree_three.root, 13)
 
 # Test the level_order method.
 p test_tree_three.level_order(test_tree_three.root)
+
+# Test the inorder method.
+p test_tree_three.inorder(test_tree_three.root)
