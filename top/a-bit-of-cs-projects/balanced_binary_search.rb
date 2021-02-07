@@ -200,6 +200,16 @@ class Tree
     recorded_data
   end
 
+  def preorder(root, recorded_data = [])
+    return if root.nil?
+
+    recorded_data.push(root.data)
+    preorder(root.left, recorded_data)
+    preorder(root.right, recorded_data)
+
+    recorded_data
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -241,3 +251,6 @@ p test_tree_three.level_order(test_tree_three.root)
 
 # Test the inorder method.
 p test_tree_three.inorder(test_tree_three.root)
+
+# Test the preorder method.
+p test_tree_three.preorder(test_tree_three.root)
