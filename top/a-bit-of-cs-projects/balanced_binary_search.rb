@@ -220,6 +220,15 @@ class Tree
     recorded_data
   end
 
+  def find_height(root)
+    return -1 if root.nil?
+
+    left_height = find_height(root.left)
+    right_height = find_height(root.right)
+
+    left_height > right_height ? left_height + 1 : right_height + 1
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -244,7 +253,7 @@ p test_tree_two
 test_tree_two.pretty_print
 
 # Test insert method.
-test_tree_three = Tree.new([1, 3, 7, 9, 10, 13])
+test_tree_three = Tree.new([1, 3, 7, 9, 10, 13, 25, 60, 120, 365])
 test_tree_three.pretty_print
 test_tree_three.insert_node(test_tree_three.root, 11)
 test_tree_three.pretty_print
@@ -267,3 +276,6 @@ p test_tree_three.preorder(test_tree_three.root)
 
 # Test the postorder method.
 p test_tree_three.postorder(test_tree_three.root)
+
+# Test the find_height method.
+p test_tree_three.find_height(test_tree_three.root)
