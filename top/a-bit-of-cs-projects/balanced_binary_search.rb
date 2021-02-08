@@ -220,11 +220,11 @@ class Tree
     recorded_data
   end
 
-  def find_height(root)
+  def height(root)
     return -1 if root.nil?
 
-    left_height = find_height(root.left)
-    right_height = find_height(root.right)
+    left_height = height(root.left)
+    right_height = height(root.right)
 
     left_height > right_height ? left_height + 1 : right_height + 1
   end
@@ -281,5 +281,5 @@ p test_tree_three.preorder(test_tree_three.root)
 # Test the postorder method.
 p test_tree_three.postorder(test_tree_three.root)
 
-# Test the find_height method.
-p test_tree_three.find_height(test_tree_three.root)
+# Test the height method.
+p test_tree_three.height(test_tree_three.root)
