@@ -231,6 +231,24 @@ class Tree
 
   def depth(node)
 
+    current_depth = 0
+    current_node = root
+
+    # If the node matches the root node, return the root node.
+    return current_depth if node == root
+
+    # Until node matches current.node go deeper left or right until the node is
+    #   located.
+    until node == current_node do
+      if node.data < current_node.data
+        current_node = current_node.left
+      else
+        current_node = current_node.right
+      end
+      current_depth += 1
+    end
+
+    current_depth
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -283,3 +301,6 @@ p test_tree_three.postorder(test_tree_three.root)
 
 # Test the height method.
 p test_tree_three.height(test_tree_three.root)
+
+# Test the depth method.
+p test_tree_three.depth(test_tree_three.find(test_tree_three.root, 120))
