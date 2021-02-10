@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 class Node
   include Comparable
   attr_accessor :data, :left, :right
