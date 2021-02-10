@@ -264,6 +264,16 @@ class Tree
     difference <= 1
   end
 
+  def rebalance
+    
+    # Create level order array of the tree.
+    level_order_array = level_order(root)
+
+    # Pass the array back into the build tree method.
+    @root = build_tree(level_order_array)
+
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -323,5 +333,10 @@ p test_tree_three.balanced?
 test_tree_three.insert_node(test_tree_three.root, 400)
 test_tree_three.insert_node(test_tree_three.root, 500)
 test_tree_three.insert_node(test_tree_three.root, 600)
+test_tree_three.pretty_print
+p test_tree_three.balanced?
+
+# Test rebalance method.
+test_tree_three.rebalance
 test_tree_three.pretty_print
 p test_tree_three.balanced?
