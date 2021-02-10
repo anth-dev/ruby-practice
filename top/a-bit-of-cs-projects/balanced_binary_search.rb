@@ -251,6 +251,19 @@ class Tree
     current_depth
   end
 
+  def balanced?
+    left_height = height(root.left)
+    right_height = height(root.right)
+
+    if left_height <= right_height
+      difference = right_height - left_height
+    else
+      difference = left_height - right_height
+    end
+    
+    difference <= 1
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -304,3 +317,11 @@ p test_tree_three.height(test_tree_three.root)
 
 # Test the depth method.
 p test_tree_three.depth(test_tree_three.find(test_tree_three.root, 120))
+
+# Test the balanced? method.
+p test_tree_three.balanced?
+test_tree_three.insert_node(test_tree_three.root, 400)
+test_tree_three.insert_node(test_tree_three.root, 500)
+test_tree_three.insert_node(test_tree_three.root, 600)
+test_tree_three.pretty_print
+p test_tree_three.balanced?
