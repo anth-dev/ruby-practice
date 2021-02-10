@@ -108,7 +108,7 @@ class Tree
     # Base case: Return root if root is nil
     return root if root.nil?
 
-    # Compare root's data value to with the key looking to be deleted to
+    # Compare root's data value with the key looking to be deleted to
     #   determine where to look for it.
     if key < root.data
       root.left = delete_node(root.left, key)
@@ -282,61 +282,37 @@ class Tree
 
 end
 
-# Testing comparable module.
-first_node = Node.new(3)
-second_node = Node.new(5)
-p first_node < second_node
-p first_node > second_node
+# Driver script.
+# 1. Create a binary search tree from an array of random numbers (`Array.new(15) { rand(1..100) }`)
+binary_search_tree = Tree.new(Array.new(15) { rand(1..100) })
+binary_search_tree.pretty_print
 
-# Testing Tree class.
-test_tree_one = Tree.new([1, 2, 3, 4, 5])
-p test_tree_one
-test_tree_one.pretty_print
+# 2. Confirm that the tree is balanced by calling `#balanced?`
+p binary_search_tree.balanced?
 
-test_tree_two = Tree.new([1, 2, 3])
-p test_tree_two
-test_tree_two.pretty_print
+# 3. Print out all elements in level, pre, post, and in order
+p binary_search_tree.level_order(binary_search_tree.root)
+p binary_search_tree.preorder(binary_search_tree.root)
+p binary_search_tree.postorder(binary_search_tree.root)
 
-# Test insert method.
-test_tree_three = Tree.new([1, 3, 7, 9, 10, 13, 25, 60, 120, 365])
-test_tree_three.pretty_print
-test_tree_three.insert_node(test_tree_three.root, 11)
-test_tree_three.pretty_print
+# 4. try to unbalance the tree by adding several numbers > 100
+binary_search_tree.insert_node(binary_search_tree.root, rand(101..200))
+binary_search_tree.insert_node(binary_search_tree.root, rand(101..200))
+binary_search_tree.insert_node(binary_search_tree.root, rand(101..200))
+binary_search_tree.insert_node(binary_search_tree.root, rand(101..200))
+binary_search_tree.pretty_print
 
-# Test delete method.
-test_tree_three.delete_node(test_tree_three.root, 11)
-test_tree_three.pretty_print
+# 5. Confirm that the tree is unbalanced by calling `#balanced?`
+p binary_search_tree.balanced?
 
-# Test the find method.
-p test_tree_three.find(test_tree_three.root, 13)
+# 6. Balance the tree by calling `#rebalance`
+binary_search_tree.rebalance
+binary_search_tree.pretty_print
 
-# Test the level_order method.
-p test_tree_three.level_order(test_tree_three.root)
+# 7. Confirm that the tree is balanced by calling `#balanced?`
+p binary_search_tree.balanced?
 
-# Test the inorder method.
-p test_tree_three.inorder(test_tree_three.root)
-
-# Test the preorder method.
-p test_tree_three.preorder(test_tree_three.root)
-
-# Test the postorder method.
-p test_tree_three.postorder(test_tree_three.root)
-
-# Test the height method.
-p test_tree_three.height(test_tree_three.root)
-
-# Test the depth method.
-p test_tree_three.depth(test_tree_three.find(test_tree_three.root, 120))
-
-# Test the balanced? method.
-p test_tree_three.balanced?
-test_tree_three.insert_node(test_tree_three.root, 400)
-test_tree_three.insert_node(test_tree_three.root, 500)
-test_tree_three.insert_node(test_tree_three.root, 600)
-test_tree_three.pretty_print
-p test_tree_three.balanced?
-
-# Test rebalance method.
-test_tree_three.rebalance
-test_tree_three.pretty_print
-p test_tree_three.balanced?
+# 8. Print out all elements in level, pre, post, and in order
+p binary_search_tree.level_order(binary_search_tree.root)
+p binary_search_tree.preorder(binary_search_tree.root)
+p binary_search_tree.postorder(binary_search_tree.root)
