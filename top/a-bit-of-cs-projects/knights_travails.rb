@@ -15,6 +15,9 @@ end
 
 # We need a knight.
 class Knight
+  def initialize(origin)
+    @
+  end
   # Take the origin and start building a subtree of nodes of every possible
   #   move as child nodes. Be sure to check that the moves would be o the board
   #   with each node having up to 8 possible children.
@@ -22,7 +25,7 @@ class Knight
   def knight_moves(origin, destination, level = 0)
     binding.pry
 
-    # Generate a network of possible moves to look for the destination.
+    # Generate a network of possible moves to look for the destination square.
   end
 end
 
