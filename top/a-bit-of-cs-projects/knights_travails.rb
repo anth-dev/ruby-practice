@@ -15,23 +15,44 @@ end
 
 # We need a knight.
 class Knight
-  def initialize(origin)
-    @
-  end
   # Take the origin and start building a subtree of nodes of every possible
-  #   move as child nodes. Be sure to check that the moves would be o the board
+  #   move as child nodes. Be sure to check that the moves would be on the board
   #   with each node having up to 8 possible children.
   
-  def knight_moves(origin, destination, level = 0)
+  def knight_moves(origin, destination, move_chain = [])
+
     binding.pry
 
-    # Generate a network of possible moves to look for the destination square.
+    # Once we get to the destination, return the move_chain.
+    return move_chain if origin == destination
+
+    # If this space has already been visited or is off the board return instead
+    #   of continuing. (We hit a dead end.)
+    return if move_chain.include?(origin) || origin.any? { |coord| coord.negative? || coord > 7 }
+
+    queue = Array.new(queue_possible_moves(origin))
+
+    'pickle rick'
+  end
+
+  private
+
+  def queue_possible_moves(origin)
+    possible_moves = []
+    possible_moves << [origin[0] - 1, origin[1] - 2] # p0
+    possible_moves << [origin[0] - 2, origin[1] - 1] # p1
+    possible_moves << [origin[0] - 2, origin[1] + 1] # p2
+    possible_moves << [origin[0] - 1, origin[1] + 2] # p3
+    possible_moves << [origin[0] + 1, origin[1] + 2] # p4
+    possible_moves << [origin[0] + 2, origin[1] + 1] # p5
+    possible_moves << [origin[0] + 2, origin[1] - 1] # p6
+    possible_moves << [origin[0] + 1, origin[1] - 2] # p7
   end
 end
 
 # Driver script
 
-test_knight = Knight.new
+test_knight = Knight.new()
 p test_knight.knight_moves([2, 1], [1, 5])
 
 # Expected output
