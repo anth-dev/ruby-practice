@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+
 # We need a chessboard. (maybe not!)
 class ChessBoard
   attr_reader :board
@@ -13,11 +14,10 @@ end
 
 # We need a knight.
 class Knight
-  # Take the origin and start building a subtree of nodes of every possible
-  #   move as child nodes. Be sure to check that the moves would be on the board
-  #   with each node having up to 8 possible children.
   
   def knight_moves(origin, destination, move_chain = [])
+
+    
 
     # Once we get to the destination, return the move_chain.
     return move_chain << origin if origin == destination
@@ -47,7 +47,7 @@ class Knight
 
       # We are getting to a point where moves_to_destination returns eventually
       #   with an array containing one possible solution
-      
+      return moves_to_destination
 
     end
   end
@@ -71,4 +71,10 @@ end
 
 test_knight = Knight.new()
 p test_knight.knight_moves([0, 0], [3, 3])
+
+p test_knight.knight_moves([0, 0], [1, 2])
+
+p test_knight.knight_moves([3, 3], [0, 0])
+
+p test_knight.knight_moves([3, 3], [4, 3])
 
