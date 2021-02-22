@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 # We need a chessboard. (maybe not!)
 class ChessBoard
   attr_reader :board
