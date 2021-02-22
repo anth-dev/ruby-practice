@@ -21,18 +21,37 @@ class Knight
   
   def knight_moves(origin, destination, move_chain = [])
 
-    binding.pry
-
     # Once we get to the destination, return the move_chain.
-    return move_chain if origin == destination
+    return move_chain << origin if origin == destination
 
     # If this space has already been visited or is off the board return instead
     #   of continuing. (We hit a dead end.)
     return if move_chain.include?(origin) || origin.any? { |coord| coord.negative? || coord > 7 }
 
+    # Once we have passed the base cases above, add where we are to the move
+    #   chain.
+    move_chain << origin
+
+    # Create a queue of each possible move from here.
     queue = Array.new(queue_possible_moves(origin))
 
-    'pickle rick'
+    # Before starting to go through the queue we should check to see if the
+    #   queue contains our destination.
+    return move_chain << destination if queue.include?(destination)
+
+    until queue.empty?
+      moves_to_destination = knight_moves(queue.first, destination, move_chain)
+
+      if moves_to_destination.nil?
+        queue.shift
+        next
+      end
+
+      # We are getting to a point where moves_to_destination returns eventually
+      #   with an array containing one possible solution
+      
+
+    end
   end
 
   private
@@ -53,10 +72,5 @@ end
 # Driver script
 
 test_knight = Knight.new()
-p test_knight.knight_moves([2, 1], [1, 5])
+p test_knight.knight_moves([0, 0], [3, 3])
 
-# Expected output
-#   [2, 1]
-#   [0, 2]
-#   [2, 3]
-#   [1, 5]
