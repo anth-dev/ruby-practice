@@ -6,55 +6,32 @@ class ChessBoard
   attr_reader :board
 
   def initialize
-    @board = Array.new(8) { Array.new(8, '') }
+    @board = Array.new(8) { Array.new(8, ' ') }
   end
 
-
+  def pretty_print
+    puts '7' + '|' + @board[0][7] + '|' + @board[1][7] + '|' + @board[2][7] + '|' + @board[3][7] + '|' + @board[4][7] + '|' + @board[5][7] + '|' + @board[6][7] + '|' + @board[7][7] + '|'
+    puts '6' + '|' + @board[0][6] + '|' + @board[1][6] + '|' + @board[2][6] + '|' + @board[3][6] + '|' + @board[4][6] + '|' + @board[5][6] + '|' + @board[6][6] + '|' + @board[7][6] + '|'
+    puts '5' + '|' + @board[0][5] + '|' + @board[1][5] + '|' + @board[2][5] + '|' + @board[3][5] + '|' + @board[4][5] + '|' + @board[5][5] + '|' + @board[6][5] + '|' + @board[7][5] + '|'
+    puts '4' + '|' + @board[0][4] + '|' + @board[1][4] + '|' + @board[2][4] + '|' + @board[3][4] + '|' + @board[4][4] + '|' + @board[5][4] + '|' + @board[6][4] + '|' + @board[7][4] + '|'
+    puts '3' + '|' + @board[0][3] + '|' + @board[1][3] + '|' + @board[2][3] + '|' + @board[3][3] + '|' + @board[4][3] + '|' + @board[5][3] + '|' + @board[6][3] + '|' + @board[7][3] + '|'
+    puts '2' + '|' + @board[0][2] + '|' + @board[1][2] + '|' + @board[2][2] + '|' + @board[3][2] + '|' + @board[4][2] + '|' + @board[5][2] + '|' + @board[6][2] + '|' + @board[7][2] + '|'
+    puts '1' + '|' + @board[0][1] + '|' + @board[1][1] + '|' + @board[2][1] + '|' + @board[3][1] + '|' + @board[4][1] + '|' + @board[5][1] + '|' + @board[6][1] + '|' + @board[7][1] + '|'
+    puts '0' + '|' + @board[0][0] + '|' + @board[1][0] + '|' + @board[2][0] + '|' + @board[3][0] + '|' + @board[4][0] + '|' + @board[5][0] + '|' + @board[6][0] + '|' + @board[7][0] + '|'
+    puts '  ' + '0 ' + '1 ' + '2 ' + '3 ' + '4 ' + '5 ' + '6 ' + '7 '
+  end
 end
 
 # We need a knight.
 class Knight
   
-  def knight_moves(origin, destination, move_chain = [])
+  def knight_moves(origin, destination)
 
-    
-
-    # Once we get to the destination, return the move_chain.
-    return move_chain << origin if origin == destination
-
-    # If this space has already been visited or is off the board return instead
-    #   of continuing. (We hit a dead end.)
-    return if move_chain.include?(origin) || origin.any? { |coord| coord.negative? || coord > 7 }
-
-    # Once we have passed the base cases above, add where we are to the move
-    #   chain.
-    move_chain << origin
-
-    # Create a queue of each possible move from here.
-    queue = Array.new(queue_possible_moves(origin))
-
-    # Before starting to go through the queue we should check to see if the
-    #   queue contains our destination.
-    return move_chain << destination if queue.include?(destination)
-
-    until queue.empty?
-      moves_to_destination = knight_moves(queue.first, destination, move_chain)
-
-      if moves_to_destination.nil?
-        queue.shift
-        next
-      end
-
-      # We are getting to a point where moves_to_destination returns eventually
-      #   with an array containing one possible solution
-      return moves_to_destination
-
-    end
   end
 
   private
 
-  def queue_possible_moves(origin)
+  def find_adjacent(origin)
     possible_moves = []
     possible_moves << [origin[0] - 1, origin[1] - 2] # p0
     possible_moves << [origin[0] - 2, origin[1] - 1] # p1
@@ -65,16 +42,19 @@ class Knight
     possible_moves << [origin[0] + 2, origin[1] - 1] # p6
     possible_moves << [origin[0] + 1, origin[1] - 2] # p7
   end
+
+  def to_str
+    'k'
+  end
 end
 
 # Driver script
 
-test_knight = Knight.new()
-p test_knight.knight_moves([0, 0], [3, 3])
+# Create a game board and a knight.
 
-p test_knight.knight_moves([0, 0], [1, 2])
+game_board = ChessBoard.new
 
-p test_knight.knight_moves([3, 3], [0, 0])
-
-p test_knight.knight_moves([3, 3], [4, 3])
+game_board.board[2][7] = Knight.new
+game_board.board[3][3] = Knight.new
+game_board.pretty_print
 
