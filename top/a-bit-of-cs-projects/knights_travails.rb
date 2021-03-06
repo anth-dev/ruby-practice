@@ -37,7 +37,7 @@ class Knight
       next_location = []
       frontier.each do |discovered|
         find_adjacent_moves(discovered).each do |adjacent_move|
-          next unless level.any? { |key, _value| key == adjacent_move } == false
+          next unless level.none? { |key, value| key == adjacent_move }
 
           level[adjacent_move] = i
           parent[adjacent_move] = discovered
