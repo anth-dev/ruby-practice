@@ -27,7 +27,18 @@ module Enumerable
   end
 
   def my_select
+    return Enumerator.new(self) unless block_given?
 
+    array_of_truth = []
+    copy_of_array = self.dup
+    i = 0
+    until i == self.length do
+      current_element = copy_of_array.shift
+      array_of_truth << current_element if yield(current_element)
+
+      i += 1
+    end
+    array_of_truth
   end
 end
 
@@ -80,3 +91,21 @@ p each_with_index_return_value
 puts "my_each_with_index return value without block"
 my_each_with_index_return_value = numbers.my_each_with_index
 p my_each_with_index_return_value
+
+# Script for checking my_select
+
+puts 'select - return all even numbers'
+select_return_value = numbers.select { |num| num.even? }
+p select_return_value
+
+puts 'my_select - return all even numbers'
+my_select_return_value = numbers.my_select { |num| num.even? }
+p my_select_return_value
+
+puts 'select return value without block'
+select_return_value = numbers.select
+p select_return_value
+
+puts 'my_select return value without block'
+my_select_return_value = numbers.my_select
+p my_select_return_value
