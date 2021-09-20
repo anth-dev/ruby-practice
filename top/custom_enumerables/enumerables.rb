@@ -30,14 +30,9 @@ module Enumerable
     return Enumerator.new(self) unless block_given?
 
     array_of_truth = []
-    copy_of_array = self.dup
-    i = 0
-    until i == self.length do
-      current_element = copy_of_array.shift
-      array_of_truth << current_element if yield(current_element)
+    # copy_of_array = self.dup
+    self.my_each { |element| array_of_truth << element if yield(element) }
 
-      i += 1
-    end
     array_of_truth
   end
 end
