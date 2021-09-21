@@ -38,6 +38,8 @@ module Enumerable
   end
 
   def my_all?
+    return true unless block_given?
+
     false_or_nil_returned = false
 
     my_each do |element|
