@@ -37,24 +37,24 @@ module Enumerable
     array_of_truth
   end
 
-  def my_all?
-    return true unless block_given?
+  def my_all?(&block)
+    block ||= ->(obj){ obj }
 
     false_or_nil_returned = false
 
     my_each do |element|
-      block_return_value = yield(element)
+      block_return_value = block.call(element)
       false_or_nil_returned = true if block_return_value.nil? || block_return_value == false
     end
 
     false_or_nil_returned == false
   end
 
-  def my_any?
-    return true unless block_given?
+  def my_any?(&block)
+    block ||= ->(obj){ obj }
 
     true_returned = false
-    my_each { |element| true_returned = true if yield(element) }
+    my_each { |element| true_returned = true if block.call(element) }
     true_returned
   end
 end
@@ -127,31 +127,31 @@ numbers = [1, 2, 3, 4, 5]
 # my_select_return_value = numbers.my_select
 # p my_select_return_value
 
-# # Script for checking my_all?
+# Script for checking my_all?
 
-# puts 'all? - check [2, 4, 6] for all even numbers'
-# all_return_value = [2, 4, 6].all? { |element| element.even? }
-# p all_return_value
+puts 'all? - check [2, 4, 6] for all even numbers'
+all_return_value = [2, 4, 6].all? { |element| element.even? }
+p all_return_value
 
-# puts 'my_all? - check [2, 4, 6] for all even numbers'
-# my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
-# p my_all_return_value
+puts 'my_all? - check [2, 4, 6] for all even numbers'
+my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
+p my_all_return_value
 
-# puts 'all? - check numbers array for all even numbers'
-# all_return_value = numbers.all? { |element| element.even? }
-# p all_return_value
+puts 'all? - check numbers array for all even numbers'
+all_return_value = numbers.all? { |element| element.even? }
+p all_return_value
 
-# puts 'my_all? - check numbers array for all even numbers'
-# my_all_return_value = numbers.my_all? { |element| element.even? }
-# p my_all_return_value
+puts 'my_all? - check numbers array for all even numbers'
+my_all_return_value = numbers.my_all? { |element| element.even? }
+p my_all_return_value
 
-# puts 'all - returns true when no block is provided'
-# all_return_value = numbers.all?
-# p all_return_value
+puts 'all - returns true when no block is provided'
+all_return_value = numbers.all?
+p all_return_value
 
-# puts 'my_all - returns true when no block is provided'
-# my_all_return_value = numbers.my_all?
-# p all_return_value
+puts 'my_all - returns true when no block is provided'
+my_all_return_value = numbers.my_all?
+p all_return_value
 
 # Script for checking my_any?
 
