@@ -38,6 +38,8 @@ module Enumerable
   end
 
   def my_all?(&block)
+    # If a pattern is supplied, the method returns whether pattern === element
+    # for every collection member (need to implement?) 
     block ||= ->(obj){ obj }
 
     false_or_nil_returned = false
@@ -51,6 +53,8 @@ module Enumerable
   end
 
   def my_any?(&block)
+    # If a pattern is supplied, the method returns whether pattern === element
+    # for any collection member (need to implement?) 
     block ||= ->(obj){ obj }
 
     true_returned = false
