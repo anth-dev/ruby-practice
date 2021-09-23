@@ -57,6 +57,25 @@ module Enumerable
     my_each { |element| true_returned = true if block.call(element) }
     true_returned
   end
+
+  def my_none?
+    # If no block is given. Check each element. Return true if no collection
+    # members are truthy. Otherwise return false. (done)
+
+    # If a pattern is supplied, the method returns whether pattern === element
+    # for none of the collection members (need to implement?)
+    unless block_given?
+      all_falsey = true
+      my_each do |item|
+        all_falsey = false unless item.nil? || item == false
+      end
+      return all_falsey
+    end
+
+    true_returned = false
+    my_each { |element| true_returned = true if yield(element) }
+    true_returned == false ? true : false
+  end
 end
 
 numbers = [1, 2, 3, 4, 5]
@@ -127,54 +146,88 @@ numbers = [1, 2, 3, 4, 5]
 # my_select_return_value = numbers.my_select
 # p my_select_return_value
 
-# Script for checking my_all?
+# # Script for checking my_all?
 
-puts 'all? - check [2, 4, 6] for all even numbers'
-all_return_value = [2, 4, 6].all? { |element| element.even? }
-p all_return_value
+# puts 'all? - check [2, 4, 6] for all even numbers'
+# all_return_value = [2, 4, 6].all? { |element| element.even? }
+# p all_return_value
 
-puts 'my_all? - check [2, 4, 6] for all even numbers'
-my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
-p my_all_return_value
+# puts 'my_all? - check [2, 4, 6] for all even numbers'
+# my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
+# p my_all_return_value
 
-puts 'all? - check numbers array for all even numbers'
-all_return_value = numbers.all? { |element| element.even? }
-p all_return_value
+# puts 'all? - check numbers array for all even numbers'
+# all_return_value = numbers.all? { |element| element.even? }
+# p all_return_value
 
-puts 'my_all? - check numbers array for all even numbers'
-my_all_return_value = numbers.my_all? { |element| element.even? }
-p my_all_return_value
+# puts 'my_all? - check numbers array for all even numbers'
+# my_all_return_value = numbers.my_all? { |element| element.even? }
+# p my_all_return_value
 
-puts 'all - returns true when no block is provided'
-all_return_value = numbers.all?
-p all_return_value
+# puts 'all - returns true when no block is provided'
+# all_return_value = numbers.all?
+# p all_return_value
 
-puts 'my_all - returns true when no block is provided'
-my_all_return_value = numbers.my_all?
-p all_return_value
+# puts 'my_all - returns true when no block is provided'
+# my_all_return_value = numbers.my_all?
+# p all_return_value
 
-# Script for checking my_any?
+# # Script for checking my_any?
 
-puts 'any - check if numbers array contains any even numbers'
-any_return_value = numbers.any? { |number| number.even? }
-p any_return_value
+# puts 'any - check if numbers array contains any even numbers'
+# any_return_value = numbers.any? { |number| number.even? }
+# p any_return_value
 
-puts 'my_any - check if numbers array contains any even numbers'
-my_any_return_value = numbers.my_any? { |number| number.even? }
-p my_any_return_value
+# puts 'my_any - check if numbers array contains any even numbers'
+# my_any_return_value = numbers.my_any? { |number| number.even? }
+# p my_any_return_value
 
-puts 'any - check if [1, 3, 5] contains any even numbers'
-any_return_value = [1, 3, 5].any? { |number| number.even? }
-p any_return_value
+# puts 'any - check if [1, 3, 5] contains any even numbers'
+# any_return_value = [1, 3, 5].any? { |number| number.even? }
+# p any_return_value
 
-puts 'my_any - check if [1, 3, 5] contains any even numbers'
-my_any_return_value = [1, 3, 5].my_any? { |number| number.even? }
-p my_any_return_value
+# puts 'my_any - check if [1, 3, 5] contains any even numbers'
+# my_any_return_value = [1, 3, 5].my_any? { |number| number.even? }
+# p my_any_return_value
 
-puts 'any - returns true if no block is provided'
-any_return_value = numbers.any?
-p any_return_value
+# puts 'any - returns true if no block is provided'
+# any_return_value = numbers.any?
+# p any_return_value
 
-puts 'my_any - returns true when no block is provided'
-my_any_return_value = numbers.any?
-p my_any_return_value
+# puts 'my_any - returns true when no block is provided'
+# my_any_return_value = numbers.any?
+# p my_any_return_value
+
+# # Script for checking my_none?
+
+puts "none - check if numbers array doesn't contain 6, should return true"
+none_return_value = numbers.none? { |number| number == 6 }
+p none_return_value
+
+puts "my_none - check if numbers array doesn't contain 6, should return true"
+my_none_return_value = numbers.my_none? { |number| number == 6 }
+p my_none_return_value
+
+puts 'none - check if numbers does not contain 4, should return false'
+none_return_value = numbers.none? { |number| number == 4 }
+p none_return_value
+
+puts 'my_none - check if numbers does not contain 4, should return false'
+my_none_return_value = numbers.my_none? { |number| number == 4 }
+p my_none_return_value
+
+puts 'none - numbers array with no block given should return false'
+none_return_value = numbers.none?
+p none_return_value
+
+puts 'my_none - numbers array with no block given should return false'
+my_none_return_value = numbers.my_none?
+p my_none_return_value
+
+puts 'none - [nil, false] should return true'
+none_return_value = [nil, false].none?
+p none_return_value
+
+puts 'my_none - [nil, false] should return true'
+my_none_return_value = [nil, false].my_none?
+p my_none_return_value
