@@ -92,6 +92,22 @@ module Enumerable
     my_each { |element| true_returned = true if yield(element) }
     true_returned == false ? true : false
   end
+
+  def my_count(item = nil)
+    number_of_matches = 0
+
+    if item
+      my_each { |element| number_of_matches += 1 if item == element}
+      return number_of_matches
+    end
+
+    if block_given?
+      my_each { |element| number_of_matches += 1 if yield(element) }
+      return number_of_matches
+    end
+
+    length
+  end
 end
 
 numbers = [1, 2, 3, 4, 5]
@@ -295,3 +311,29 @@ numbers = [1, 2, 3, 4, 5]
 # puts 'my_none - with a pattern of Integer'
 # my_none_return_value = numbers.my_none?(Integer)
 # p my_none_return_value
+
+# # Script for checking my_count
+
+puts 'count - count the number of items in the numbers array'
+count_return_value = numbers.count
+p count_return_value
+
+puts 'my_count - count the number of items in the numbers array'
+my_count_return_value = numbers.my_count
+p my_count_return_value
+
+puts 'count - with argument given'
+count_return_value = [1, 3, 5, 3, 3].count(3)
+p count_return_value
+
+puts 'my_count - with argument given'
+my_count_return_value = [1, 3, 5, 3, 3].my_count(3)
+p my_count_return_value
+
+puts 'count - with block given'
+count_return_value = numbers.count { |number| (number % 2).zero?  }
+p count_return_value
+
+puts 'my_count - with block given'
+my_count_return_value = numbers.my_count { |number| (number % 2).zero? }
+p my_count_return_value
