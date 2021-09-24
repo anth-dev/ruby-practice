@@ -37,10 +37,15 @@ module Enumerable
     array_of_truth
   end
 
-  def my_all?(&block)
-    # If a pattern is supplied, the method returns whether pattern === element
-    # for every collection member (need to implement?) 
+  def my_all?(pattern = nil, &block)
+
     block ||= ->(obj){ obj }
+
+    if pattern
+      any_false = false
+      my_each { |element| any_false = true unless pattern === element }
+      return any_false == false ? true : false
+    end
 
     false_or_nil_returned = false
 
@@ -52,22 +57,29 @@ module Enumerable
     false_or_nil_returned == false
   end
 
-  def my_any?(&block)
-    # If a pattern is supplied, the method returns whether pattern === element
-    # for any collection member (need to implement?) 
-    block ||= ->(obj){ obj }
+  def my_any?(pattern = nil, &block)
+
+    block ||= ->(obj) { obj }
+
+    if pattern
+      true_returned = false
+      my_each { |element| true_returned = true if pattern === element }
+      return true_returned == true ? true : false
+    end
 
     true_returned = false
     my_each { |element| true_returned = true if block.call(element) }
     true_returned
   end
 
-  def my_none?
-    # If no block is given. Check each element. Return true if no collection
-    # members are truthy. Otherwise return false. (done)
+  def my_none?(pattern = nil)
 
-    # If a pattern is supplied, the method returns whether pattern === element
-    # for none of the collection members (need to implement?)
+    if pattern
+      true_returned = false
+      my_each { |element| true_returned = true if pattern === element }
+      return true_returned == false ? true : false
+    end
+
     unless block_given?
       all_falsey = true
       my_each do |item|
@@ -176,6 +188,22 @@ numbers = [1, 2, 3, 4, 5]
 # my_all_return_value = numbers.my_all?
 # p all_return_value
 
+# puts 'all - with a pattern of 3'
+# all_return_value = numbers.all?(3)
+# p all_return_value
+
+# puts 'my_all - with a pattern of 3'
+# my_all_return_value = numbers.my_all?(3)
+# p my_all_return_value
+
+# puts 'all - with a pattern of Integer'
+# all_return_value = numbers.all?(Integer)
+# p all_return_value
+
+# puts 'my_all - with a pattern of Integer'
+# my_all_return_value = numbers.my_all?(Integer)
+# p my_all_return_value
+
 # # Script for checking my_any?
 
 # puts 'any - check if numbers array contains any even numbers'
@@ -202,36 +230,68 @@ numbers = [1, 2, 3, 4, 5]
 # my_any_return_value = numbers.any?
 # p my_any_return_value
 
+# puts 'any - with a pattern of 6'
+# any_return_value = numbers.any?(6)
+# p any_return_value
+
+# puts 'my_any - with a pattern of 6'
+# my_any_return_value = numbers.my_any?(6)
+# p my_any_return_value
+
+# puts 'any - with a pattern of Integer'
+# any_return_value = numbers.any?(Integer)
+# p any_return_value
+
+# puts 'my_any - with a pattern of Integer'
+# my_any_return_value = numbers.my_any?(Integer)
+# p my_any_return_value
+
 # # Script for checking my_none?
 
-puts "none - check if numbers array doesn't contain 6, should return true"
-none_return_value = numbers.none? { |number| number == 6 }
-p none_return_value
+# puts "none - check if numbers array doesn't contain 6, should return true"
+# none_return_value = numbers.none? { |number| number == 6 }
+# p none_return_value
 
-puts "my_none - check if numbers array doesn't contain 6, should return true"
-my_none_return_value = numbers.my_none? { |number| number == 6 }
-p my_none_return_value
+# puts "my_none - check if numbers array doesn't contain 6, should return true"
+# my_none_return_value = numbers.my_none? { |number| number == 6 }
+# p my_none_return_value
 
-puts 'none - check if numbers does not contain 4, should return false'
-none_return_value = numbers.none? { |number| number == 4 }
-p none_return_value
+# puts 'none - check if numbers does not contain 4, should return false'
+# none_return_value = numbers.none? { |number| number == 4 }
+# p none_return_value
 
-puts 'my_none - check if numbers does not contain 4, should return false'
-my_none_return_value = numbers.my_none? { |number| number == 4 }
-p my_none_return_value
+# puts 'my_none - check if numbers does not contain 4, should return false'
+# my_none_return_value = numbers.my_none? { |number| number == 4 }
+# p my_none_return_value
 
-puts 'none - numbers array with no block given should return false'
-none_return_value = numbers.none?
-p none_return_value
+# puts 'none - numbers array with no block given should return false'
+# none_return_value = numbers.none?
+# p none_return_value
 
-puts 'my_none - numbers array with no block given should return false'
-my_none_return_value = numbers.my_none?
-p my_none_return_value
+# puts 'my_none - numbers array with no block given should return false'
+# my_none_return_value = numbers.my_none?
+# p my_none_return_value
 
-puts 'none - [nil, false] should return true'
-none_return_value = [nil, false].none?
-p none_return_value
+# puts 'none - [nil, false] should return true'
+# none_return_value = [nil, false].none?
+# p none_return_value
 
-puts 'my_none - [nil, false] should return true'
-my_none_return_value = [nil, false].my_none?
-p my_none_return_value
+# puts 'my_none - [nil, false] should return true'
+# my_none_return_value = [nil, false].my_none?
+# p my_none_return_value
+
+# puts 'none - with a pattern of 6'
+# none_return_value = numbers.none?(6)
+# p none_return_value
+
+# puts 'my_none - with a pattern of 6'
+# my_none_return_value = numbers.my_none?(6)
+# p my_none_return_value
+
+# puts 'none - with a pattern of Integer'
+# none_return_value = numbers.none?(Integer)
+# p none_return_value
+
+# puts 'my_none - with a pattern of Integer'
+# my_none_return_value = numbers.my_none?(Integer)
+# p my_none_return_value
