@@ -117,6 +117,20 @@ module Enumerable
     my_each { |item| mapped_items << yield(item) }
     mapped_items
   end
+
+  def my_inject(a = nil, b = nil)
+    total = 0
+    items = to_a
+
+    unless block_given?
+      b.nil? ? operation = a : (total, operation = a, b)
+      items.my_each { |item| total = item.send(operation, total) }
+      return total
+    end
+    
+    items.my_each { |item| total = yield(total, item) }
+    return total
+  end
 end
 
 numbers = [1, 2, 3, 4, 5]
@@ -367,4 +381,26 @@ numbers = [1, 2, 3, 4, 5]
 
 # # Script for checking my_inject
 
-puts 'inject - '
+puts 'inject - sum some numbers with a symbol argument'
+inject_return_value = (5..10).inject(:+)
+p inject_return_value
+
+puts 'my_inject - sum some numbers with a symbol argument'
+my_inject_return_value = (5..10).my_inject(:+)
+p my_inject_return_value
+
+puts 'inject - sum some numbers with a block'
+inject_return_value = (5..10).inject { |sum, n| sum + n }
+p inject_return_value
+
+puts 'my_inject - sum some numbers with a block'
+my_inject_return_value = (5..10).my_inject { |sum, n| sum + n }
+p my_inject_return_value
+
+puts 'inject - multiply some numbers with arguments'
+inject_return_value = (5..10).inject(1, :*)
+p inject_return_value
+
+puts 'my_inject - multiply some numbers with arguments'
+my_inject_return_value = (5..10).my_inject(1, :*)
+p my_inject_return_value
