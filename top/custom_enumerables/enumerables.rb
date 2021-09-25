@@ -119,15 +119,16 @@ module Enumerable
   end
 
   def my_inject(a = nil, b = nil)
-    total = 0
     items = to_a
 
     unless block_given?
+      total = 0
       b.nil? ? operation = a : (total, operation = a, b)
       items.my_each { |item| total = item.send(operation, total) }
       return total
     end
     
+    total = a || 0
     items.my_each { |item| total = yield(total, item) }
     return total
   end
@@ -403,4 +404,12 @@ p inject_return_value
 
 puts 'my_inject - multiply some numbers with arguments'
 my_inject_return_value = (5..10).my_inject(1, :*)
+p my_inject_return_value
+
+puts 'inject - multiply some numbers with a block'
+inject_return_value = (5..10).inject(1) { |product, n| product * n }
+p inject_return_value
+
+puts 'my_inject - multiply some numbers with a block'
+my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
 p my_inject_return_value
