@@ -128,7 +128,7 @@ module Enumerable
       return total
     end
     
-    total = a || 0
+    total = a || items.shift
     items.my_each { |item| total = yield(total, item) }
     return total
   end
@@ -412,4 +412,16 @@ p inject_return_value
 
 puts 'my_inject - multiply some numbers with a block'
 my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
+p my_inject_return_value
+
+puts 'inject - find the longest word with a block'
+inject_return_value = %w[ ruby c go ].inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p inject_return_value
+
+puts 'my_inject - find the longest word with a block'
+my_inject_return_value = %w[ ruby c go ].my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
 p my_inject_return_value
