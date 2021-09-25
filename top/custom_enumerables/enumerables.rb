@@ -108,6 +108,15 @@ module Enumerable
 
     length
   end
+
+  def my_map
+    return Enumerator.new(self) unless block_given?
+
+    mapped_items = []
+
+    my_each { |item| mapped_items << yield(item) }
+    mapped_items
+  end
 end
 
 numbers = [1, 2, 3, 4, 5]
@@ -339,3 +348,23 @@ numbers = [1, 2, 3, 4, 5]
 # p my_count_return_value
 
 # # Script for checking my_map
+
+# puts 'map - multiply numbers array by 2'
+# map_return_value = numbers.map { |number| number * 2 }
+# p map_return_value
+
+# puts 'my_map - multiply numbers array by 2'
+# my_map_return_value = numbers.my_map { |number| number * 2 }
+# p my_map_return_value
+
+# puts 'map - with no block'
+# map_return_value = numbers.map
+# p map_return_value
+
+# puts 'my_map - with no block'
+# my_map_return_value = numbers.my_map
+# p my_map_return_value
+
+# # Script for checking my_inject
+
+puts 'inject - '
