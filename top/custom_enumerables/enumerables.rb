@@ -119,7 +119,7 @@ module Enumerable
   end
 
   def my_inject(a = nil, b = nil)
-    items = to_a
+    items = dup.to_a
 
     unless block_given?
       total = 0
@@ -386,51 +386,53 @@ numbers = [1, 2, 3, 4, 5]
 
 # # Script for checking my_inject
 
-# puts 'inject - sum some numbers with a symbol argument'
-# inject_return_value = (5..10).inject(:+)
-# p inject_return_value
+puts 'inject - sum some numbers with a symbol argument'
+inject_return_value = (5..10).inject(:+)
+p inject_return_value
 
-# puts 'my_inject - sum some numbers with a symbol argument'
-# my_inject_return_value = (5..10).my_inject(:+)
-# p my_inject_return_value
+puts 'my_inject - sum some numbers with a symbol argument'
+my_inject_return_value = (5..10).my_inject(:+)
+p my_inject_return_value
 
-# puts 'inject - sum some numbers with a block'
-# inject_return_value = (5..10).inject { |sum, n| sum + n }
-# p inject_return_value
+puts 'inject - sum some numbers with a block'
+inject_return_value = (5..10).inject { |sum, n| sum + n }
+p inject_return_value
 
-# puts 'my_inject - sum some numbers with a block'
-# my_inject_return_value = (5..10).my_inject { |sum, n| sum + n }
-# p my_inject_return_value
+puts 'my_inject - sum some numbers with a block'
+my_inject_return_value = (5..10).my_inject { |sum, n| sum + n }
+p my_inject_return_value
 
-# puts 'inject - multiply some numbers with arguments'
-# inject_return_value = (5..10).inject(1, :*)
-# p inject_return_value
+puts 'inject - multiply some numbers with arguments'
+inject_return_value = (5..10).inject(1, :*)
+p inject_return_value
 
-# puts 'my_inject - multiply some numbers with arguments'
-# my_inject_return_value = (5..10).my_inject(1, :*)
-# p my_inject_return_value
+puts 'my_inject - multiply some numbers with arguments'
+my_inject_return_value = (5..10).my_inject(1, :*)
+p my_inject_return_value
 
-# puts 'inject - multiply some numbers with a block'
-# inject_return_value = (5..10).inject(1) { |product, n| product * n }
-# p inject_return_value
+puts 'inject - multiply some numbers with a block'
+inject_return_value = (5..10).inject(1) { |product, n| product * n }
+p inject_return_value
 
-# puts 'my_inject - multiply some numbers with a block'
-# my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
-# p my_inject_return_value
+puts 'my_inject - multiply some numbers with a block'
+my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
+p my_inject_return_value
 
-# puts 'inject - find the longest word with a block'
-# inject_return_value = %w[ ruby c go ].inject do |memo, word|
-#   memo.length > word.length ? memo : word
-# end
-# p inject_return_value
+puts 'inject - find the longest word with a block'
+inject_return_value = %w[ ruby c go ].inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p inject_return_value
 
-# puts 'my_inject - find the longest word with a block'
-# my_inject_return_value = %w[ ruby c go ].my_inject do |memo, word|
-#   memo.length > word.length ? memo : word
-# end
-# p my_inject_return_value
+puts 'my_inject - find the longest word with a block'
+my_inject_return_value = %w[ ruby c go ].my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p my_inject_return_value
 
-# # Script for checking multiply_els
+# Script for checking multiply_els
+
+binding.pry
 
 puts 'multiply_els - multiply [2, 4, 5]'
 multiply_els_return_value = multiply_els([2, 4, 5])
