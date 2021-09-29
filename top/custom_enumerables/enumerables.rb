@@ -123,17 +123,17 @@ module Enumerable
     mapped_items
   end
 
-  def my_inject(a = nil, b = nil)
+  def my_inject(total_or_operation = nil, operation = nil)
     items = dup.to_a
 
     unless block_given?
       total = 0
-      b.nil? ? operation = a : (total, operation = a, b)
+      operation.nil? ? operation = total_or_operation : (total, operation = total_or_operation, operation)
       items.my_each { |item| total = item.send(operation, total) }
       return total
     end
     
-    total = a || items.shift
+    total = total_or_operation || items.shift
     items.my_each { |item| total = yield(total, item) }
     return total
   end
@@ -145,233 +145,233 @@ end
 
 numbers = [1, 2, 3, 4, 5]
 
-# # Script for checking my_each
+# Script for checking my_each
 
-# puts 'my_each - puts each item'
-# numbers.my_each { |item| puts item }
+puts 'my_each - puts each item'
+numbers.my_each { |item| puts item }
 
-# puts 'each - puts each item'
-# numbers.each { |item| puts item }
+puts 'each - puts each item'
+numbers.each { |item| puts item }
 
-# puts 'my_each_return_value with_block'
-# my_each_return_value = numbers.my_each { 'I am in a block!' }
-# p my_each_return_value
+puts 'my_each_return_value with_block'
+my_each_return_value = numbers.my_each { 'I am in a block!' }
+p my_each_return_value
 
-# puts 'each return value with block'
-# each_return_value = numbers.each { 'I am also in a block!' }
-# p each_return_value
+puts 'each return value with block'
+each_return_value = numbers.each { 'I am also in a block!' }
+p each_return_value
 
-# puts 'my_each return value without block'
-# my_each_return_value = numbers.my_each
-# p my_each_return_value
+puts 'my_each return value without block'
+my_each_return_value = numbers.my_each
+p my_each_return_value
 
-# puts 'each return value without block'
-# each_return_value = numbers.each
-# p each_return_value
+puts 'each return value without block'
+each_return_value = numbers.each
+p each_return_value
 
-# # Script for checking my_each_with_index
+# Script for checking my_each_with_index
 
-# puts "each_with_index - puts each item and it's index"
-# numbers.each_with_index { |item, index| puts "#{index}: #{item}" }
+puts "each_with_index - puts each item and it's index"
+numbers.each_with_index { |item, index| puts "#{index}: #{item}" }
 
-# puts "my_each_with_index - puts each item and it's index"
-# numbers.my_each_with_index { |item, index| puts "#{index}: #{item}" }
+puts "my_each_with_index - puts each item and it's index"
+numbers.my_each_with_index { |item, index| puts "#{index}: #{item}" }
 
-# puts 'each_with_index return value with block'
-# each_with_index_return_value = numbers.each_with_index { 'I am in the block'}
-# p each_with_index_return_value
+puts 'each_with_index return value with block'
+each_with_index_return_value = numbers.each_with_index { 'I am in the block'}
+p each_with_index_return_value
 
-# puts 'my_each_with_index return value with block'
-# my_each_with_index_return_value = numbers.my_each_with_index { 'I am in the block'}
-# p my_each_with_index_return_value
+puts 'my_each_with_index return value with block'
+my_each_with_index_return_value = numbers.my_each_with_index { 'I am in the block'}
+p my_each_with_index_return_value
 
-# puts 'each_with_index return value without block'
-# each_with_index_return_value = numbers.each_with_index
-# p each_with_index_return_value
+puts 'each_with_index return value without block'
+each_with_index_return_value = numbers.each_with_index
+p each_with_index_return_value
 
-# puts 'my_each_with_index return value without block'
-# my_each_with_index_return_value = numbers.my_each_with_index
-# p my_each_with_index_return_value
+puts 'my_each_with_index return value without block'
+my_each_with_index_return_value = numbers.my_each_with_index
+p my_each_with_index_return_value
 
-# # Script for checking my_select
+# Script for checking my_select
 
-# puts 'select - return all even numbers'
-# select_return_value = numbers.select { |num| num.even? }
-# p select_return_value
+puts 'select - return all even numbers'
+select_return_value = numbers.select { |num| num.even? }
+p select_return_value
 
-# puts 'my_select - return all even numbers'
-# my_select_return_value = numbers.my_select { |num| num.even? }
-# p my_select_return_value
+puts 'my_select - return all even numbers'
+my_select_return_value = numbers.my_select { |num| num.even? }
+p my_select_return_value
 
-# puts 'select return value without block'
-# select_return_value = numbers.select
-# p select_return_value
+puts 'select return value without block'
+select_return_value = numbers.select
+p select_return_value
 
-# puts 'my_select return value without block'
-# my_select_return_value = numbers.my_select
-# p my_select_return_value
+puts 'my_select return value without block'
+my_select_return_value = numbers.my_select
+p my_select_return_value
 
-# # Script for checking my_all?
+# Script for checking my_all?
 
-# puts 'all? - check [2, 4, 6] for all even numbers'
-# all_return_value = [2, 4, 6].all? { |element| element.even? }
-# p all_return_value
+puts 'all? - check [2, 4, 6] for all even numbers'
+all_return_value = [2, 4, 6].all? { |element| element.even? }
+p all_return_value
 
-# puts 'my_all? - check [2, 4, 6] for all even numbers'
-# my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
-# p my_all_return_value
+puts 'my_all? - check [2, 4, 6] for all even numbers'
+my_all_return_value = [2, 4, 6].my_all? { |element| element.even? }
+p my_all_return_value
 
-# puts 'all? - check numbers array for all even numbers'
-# all_return_value = numbers.all? { |element| element.even? }
-# p all_return_value
+puts 'all? - check numbers array for all even numbers'
+all_return_value = numbers.all? { |element| element.even? }
+p all_return_value
 
-# puts 'my_all? - check numbers array for all even numbers'
-# my_all_return_value = numbers.my_all? { |element| element.even? }
-# p my_all_return_value
+puts 'my_all? - check numbers array for all even numbers'
+my_all_return_value = numbers.my_all? { |element| element.even? }
+p my_all_return_value
 
-# puts 'all - returns true when no block is provided'
-# all_return_value = numbers.all?
-# p all_return_value
+puts 'all - returns true when no block is provided'
+all_return_value = numbers.all?
+p all_return_value
 
-# puts 'my_all - returns true when no block is provided'
-# my_all_return_value = numbers.my_all?
-# p all_return_value
+puts 'my_all - returns true when no block is provided'
+my_all_return_value = numbers.my_all?
+p all_return_value
 
-# puts 'all - with a pattern of 3'
-# all_return_value = numbers.all?(3)
-# p all_return_value
+puts 'all - with a pattern of 3'
+all_return_value = numbers.all?(3)
+p all_return_value
 
-# puts 'my_all - with a pattern of 3'
-# my_all_return_value = numbers.my_all?(3)
-# p my_all_return_value
+puts 'my_all - with a pattern of 3'
+my_all_return_value = numbers.my_all?(3)
+p my_all_return_value
 
-# puts 'all - with a pattern of Integer'
-# all_return_value = numbers.all?(Integer)
-# p all_return_value
+puts 'all - with a pattern of Integer'
+all_return_value = numbers.all?(Integer)
+p all_return_value
 
-# puts 'my_all - with a pattern of Integer'
-# my_all_return_value = numbers.my_all?(Integer)
-# p my_all_return_value
+puts 'my_all - with a pattern of Integer'
+my_all_return_value = numbers.my_all?(Integer)
+p my_all_return_value
 
-# # Script for checking my_any?
+# Script for checking my_any?
 
-# puts 'any - check if numbers array contains any even numbers'
-# any_return_value = numbers.any? { |number| number.even? }
-# p any_return_value
+puts 'any - check if numbers array contains any even numbers'
+any_return_value = numbers.any? { |number| number.even? }
+p any_return_value
 
-# puts 'my_any - check if numbers array contains any even numbers'
-# my_any_return_value = numbers.my_any? { |number| number.even? }
-# p my_any_return_value
+puts 'my_any - check if numbers array contains any even numbers'
+my_any_return_value = numbers.my_any? { |number| number.even? }
+p my_any_return_value
 
-# puts 'any - check if [1, 3, 5] contains any even numbers'
-# any_return_value = [1, 3, 5].any? { |number| number.even? }
-# p any_return_value
+puts 'any - check if [1, 3, 5] contains any even numbers'
+any_return_value = [1, 3, 5].any? { |number| number.even? }
+p any_return_value
 
-# puts 'my_any - check if [1, 3, 5] contains any even numbers'
-# my_any_return_value = [1, 3, 5].my_any? { |number| number.even? }
-# p my_any_return_value
+puts 'my_any - check if [1, 3, 5] contains any even numbers'
+my_any_return_value = [1, 3, 5].my_any? { |number| number.even? }
+p my_any_return_value
 
-# puts 'any - returns true if no block is provided'
-# any_return_value = numbers.any?
-# p any_return_value
+puts 'any - returns true if no block is provided'
+any_return_value = numbers.any?
+p any_return_value
 
-# puts 'my_any - returns true when no block is provided'
-# my_any_return_value = numbers.any?
-# p my_any_return_value
+puts 'my_any - returns true when no block is provided'
+my_any_return_value = numbers.any?
+p my_any_return_value
 
-# puts 'any - with a pattern of 6'
-# any_return_value = numbers.any?(6)
-# p any_return_value
+puts 'any - with a pattern of 6'
+any_return_value = numbers.any?(6)
+p any_return_value
 
-# puts 'my_any - with a pattern of 6'
-# my_any_return_value = numbers.my_any?(6)
-# p my_any_return_value
+puts 'my_any - with a pattern of 6'
+my_any_return_value = numbers.my_any?(6)
+p my_any_return_value
 
-# puts 'any - with a pattern of Integer'
-# any_return_value = numbers.any?(Integer)
-# p any_return_value
+puts 'any - with a pattern of Integer'
+any_return_value = numbers.any?(Integer)
+p any_return_value
 
-# puts 'my_any - with a pattern of Integer'
-# my_any_return_value = numbers.my_any?(Integer)
-# p my_any_return_value
+puts 'my_any - with a pattern of Integer'
+my_any_return_value = numbers.my_any?(Integer)
+p my_any_return_value
 
-# # Script for checking my_none?
+# Script for checking my_none?
 
-# puts "none - check if numbers array doesn't contain 6, should return true"
-# none_return_value = numbers.none? { |number| number == 6 }
-# p none_return_value
+puts "none - check if numbers array doesn't contain 6, should return true"
+none_return_value = numbers.none? { |number| number == 6 }
+p none_return_value
 
-# puts "my_none - check if numbers array doesn't contain 6, should return true"
-# my_none_return_value = numbers.my_none? { |number| number == 6 }
-# p my_none_return_value
+puts "my_none - check if numbers array doesn't contain 6, should return true"
+my_none_return_value = numbers.my_none? { |number| number == 6 }
+p my_none_return_value
 
-# puts 'none - check if numbers does not contain 4, should return false'
-# none_return_value = numbers.none? { |number| number == 4 }
-# p none_return_value
+puts 'none - check if numbers does not contain 4, should return false'
+none_return_value = numbers.none? { |number| number == 4 }
+p none_return_value
 
-# puts 'my_none - check if numbers does not contain 4, should return false'
-# my_none_return_value = numbers.my_none? { |number| number == 4 }
-# p my_none_return_value
+puts 'my_none - check if numbers does not contain 4, should return false'
+my_none_return_value = numbers.my_none? { |number| number == 4 }
+p my_none_return_value
 
-# puts 'none - numbers array with no block given should return false'
-# none_return_value = numbers.none?
-# p none_return_value
+puts 'none - numbers array with no block given should return false'
+none_return_value = numbers.none?
+p none_return_value
 
-# puts 'my_none - numbers array with no block given should return false'
-# my_none_return_value = numbers.my_none?
-# p my_none_return_value
+puts 'my_none - numbers array with no block given should return false'
+my_none_return_value = numbers.my_none?
+p my_none_return_value
 
-# puts 'none - [nil, false] should return true'
-# none_return_value = [nil, false].none?
-# p none_return_value
+puts 'none - [nil, false] should return true'
+none_return_value = [nil, false].none?
+p none_return_value
 
-# puts 'my_none - [nil, false] should return true'
-# my_none_return_value = [nil, false].my_none?
-# p my_none_return_value
+puts 'my_none - [nil, false] should return true'
+my_none_return_value = [nil, false].my_none?
+p my_none_return_value
 
-# puts 'none - with a pattern of 6'
-# none_return_value = numbers.none?(6)
-# p none_return_value
+puts 'none - with a pattern of 6'
+none_return_value = numbers.none?(6)
+p none_return_value
 
-# puts 'my_none - with a pattern of 6'
-# my_none_return_value = numbers.my_none?(6)
-# p my_none_return_value
+puts 'my_none - with a pattern of 6'
+my_none_return_value = numbers.my_none?(6)
+p my_none_return_value
 
-# puts 'none - with a pattern of Integer'
-# none_return_value = numbers.none?(Integer)
-# p none_return_value
+puts 'none - with a pattern of Integer'
+none_return_value = numbers.none?(Integer)
+p none_return_value
 
-# puts 'my_none - with a pattern of Integer'
-# my_none_return_value = numbers.my_none?(Integer)
-# p my_none_return_value
+puts 'my_none - with a pattern of Integer'
+my_none_return_value = numbers.my_none?(Integer)
+p my_none_return_value
 
-# # Script for checking my_count
+# Script for checking my_count
 
-# puts 'count - count the number of items in the numbers array'
-# count_return_value = numbers.count
-# p count_return_value
+puts 'count - count the number of items in the numbers array'
+count_return_value = numbers.count
+p count_return_value
 
-# puts 'my_count - count the number of items in the numbers array'
-# my_count_return_value = numbers.my_count
-# p my_count_return_value
+puts 'my_count - count the number of items in the numbers array'
+my_count_return_value = numbers.my_count
+p my_count_return_value
 
-# puts 'count - with argument given'
-# count_return_value = [1, 3, 5, 3, 3].count(3)
-# p count_return_value
+puts 'count - with argument given'
+count_return_value = [1, 3, 5, 3, 3].count(3)
+p count_return_value
 
-# puts 'my_count - with argument given'
-# my_count_return_value = [1, 3, 5, 3, 3].my_count(3)
-# p my_count_return_value
+puts 'my_count - with argument given'
+my_count_return_value = [1, 3, 5, 3, 3].my_count(3)
+p my_count_return_value
 
-# puts 'count - with block given'
-# count_return_value = numbers.count { |number| (number % 2).zero?  }
-# p count_return_value
+puts 'count - with block given'
+count_return_value = numbers.count { |number| (number % 2).zero?  }
+p count_return_value
 
-# puts 'my_count - with block given'
-# my_count_return_value = numbers.my_count { |number| (number % 2).zero? }
-# p my_count_return_value
+puts 'my_count - with block given'
+my_count_return_value = numbers.my_count { |number| (number % 2).zero? }
+p my_count_return_value
 
-# # Script for checking my_map
+# Script for checking my_map
 
 puts 'map - multiply numbers array by 2'
 map_return_value = numbers.map { |number| number * 2 }
@@ -394,54 +394,54 @@ times_two = Proc.new { |x| x * 2 }
 my_map_return_value = numbers.my_map(times_two)
 p my_map_return_value
 
-# # Script for checking my_inject
+# Script for checking my_inject
 
-# puts 'inject - sum some numbers with a symbol argument'
-# inject_return_value = (5..10).inject(:+)
-# p inject_return_value
+puts 'inject - sum some numbers with a symbol argument'
+inject_return_value = (5..10).inject(:+)
+p inject_return_value
 
-# puts 'my_inject - sum some numbers with a symbol argument'
-# my_inject_return_value = (5..10).my_inject(:+)
-# p my_inject_return_value
+puts 'my_inject - sum some numbers with a symbol argument'
+my_inject_return_value = (5..10).my_inject(:+)
+p my_inject_return_value
 
-# puts 'inject - sum some numbers with a block'
-# inject_return_value = (5..10).inject { |sum, n| sum + n }
-# p inject_return_value
+puts 'inject - sum some numbers with a block'
+inject_return_value = (5..10).inject { |sum, n| sum + n }
+p inject_return_value
 
-# puts 'my_inject - sum some numbers with a block'
-# my_inject_return_value = (5..10).my_inject { |sum, n| sum + n }
-# p my_inject_return_value
+puts 'my_inject - sum some numbers with a block'
+my_inject_return_value = (5..10).my_inject { |sum, n| sum + n }
+p my_inject_return_value
 
-# puts 'inject - multiply some numbers with arguments'
-# inject_return_value = (5..10).inject(1, :*)
-# p inject_return_value
+puts 'inject - multiply some numbers with arguments'
+inject_return_value = (5..10).inject(1, :*)
+p inject_return_value
 
-# puts 'my_inject - multiply some numbers with arguments'
-# my_inject_return_value = (5..10).my_inject(1, :*)
-# p my_inject_return_value
+puts 'my_inject - multiply some numbers with arguments'
+my_inject_return_value = (5..10).my_inject(1, :*)
+p my_inject_return_value
 
-# puts 'inject - multiply some numbers with a block'
-# inject_return_value = (5..10).inject(1) { |product, n| product * n }
-# p inject_return_value
+puts 'inject - multiply some numbers with a block'
+inject_return_value = (5..10).inject(1) { |product, n| product * n }
+p inject_return_value
 
-# puts 'my_inject - multiply some numbers with a block'
-# my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
-# p my_inject_return_value
+puts 'my_inject - multiply some numbers with a block'
+my_inject_return_value = (5..10).my_inject(1) { |product, n| product * n }
+p my_inject_return_value
 
-# puts 'inject - find the longest word with a block'
-# inject_return_value = %w[ ruby c go ].inject do |memo, word|
-#   memo.length > word.length ? memo : word
-# end
-# p inject_return_value
+puts 'inject - find the longest word with a block'
+inject_return_value = %w[ ruby c go ].inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p inject_return_value
 
-# puts 'my_inject - find the longest word with a block'
-# my_inject_return_value = %w[ ruby c go ].my_inject do |memo, word|
-#   memo.length > word.length ? memo : word
-# end
-# p my_inject_return_value
+puts 'my_inject - find the longest word with a block'
+my_inject_return_value = %w[ ruby c go ].my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p my_inject_return_value
 
-# # Script for checking multiply_els
+# Script for checking multiply_els
 
-# puts 'multiply_els - multiply [2, 4, 5]'
-# multiply_els_return_value = multiply_els([2, 4, 5])
-# p multiply_els_return_value
+puts 'multiply_els - multiply [2, 4, 5]'
+multiply_els_return_value = multiply_els([2, 4, 5])
+p multiply_els_return_value
